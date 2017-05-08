@@ -1,0 +1,122 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Nationalities edit{% endblock %}
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice') %}
+            <div  class="alert alert-block alert-success fade in">
+               <h4 class="alert-heading">
+                        Success!
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+               </h4>
+                
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="left-sidebar2">
+<div class="row-fluid">
+    <!-- first -->
+ 
+      <div class="widget">
+      <div class="widget-header">
+      <div class="title " data-icon="">
+       Nationalities Edit
+       </div></div>
+      <div class="widget-body">
+          <table class="table table-condensed table-striped table-bordered no-margin">
+           <tbody>
+               <tr style="font-weight: bold">
+                        <td class="widget-header" width="6%"><div align="center" style="font-size: 18px;">*</div></td>
+                        <td class="widget-header"><div align="center">English Name</div></td>
+                        <td class="widget-header"><div align="center">Arabic Name</div></td>
+                        <td class="widget-header"><div align="center">Edit</div></td>
+                        <td class="widget-header"><div align="center">Delete</div></td>
+                       
+                    </tr>
+                       
+                        {% set count = 0 %}
+                        {% for entity in entities  %}
+                        {% set count = count+1 %}
+                    <tr>
+                        <td><div align="center" style="font-size: 18px;">{{count}}</div></td>
+                        <td><div align="center">{{ entity.enName }}</div></td>
+                        <td><div align="center">{{ entity.arname }}</div></td>
+                        <td><div align="center" id="flip2"><a class="icon-edit" title="Edit" href="{{ path('Nationalities_edit', { 'id': entity.id }) }}"></a></div></td>
+                        <td><div align="center"><a href="?"><a class="delete_entity icon-trash" title="Delete" href="{{ path('Nationalities_delete', { 'id': entity.id }) }}"></a></div></td>
+                        </tr>
+                    {% endfor %}
+                       
+                 <tr id="pane2">
+           <p></p>
+                     <form action="{{ path('Nationalities_edit', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}novalidate>
+                        {{ form_widget(edit_form._token) }}
+                        <td><div align="center" style="font-size: 18px;">*</div></td>
+                        <td><div align="center">{{form_widget(edit_form.enName) }}</div></td>
+                        <td><div align="center">{{form_widget(edit_form.arName) }}</div></td>
+                        <td colspan="2"><div align="center" ><button class="btn btn-success" type="submit">Edit</button></div></td>
+                     </form>
+                    </tr>
+                    
+                    
+                  </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8" class="widget-header">
+                            <div class="clearfix" style="padding: 0 5px;">
+                                <div  class="pull-left">
+                                  <div class="badge badge-info">Count {{count}}</div>                                                                  
+                                </div> 
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+          </table> 
+              <p></p>
+              <div id="flip"><a href="{{path('Nationalities')}}"> Back to List</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+<script> 
+$(document).ready(function(){
+  $("#flip2").click(function(){
+    $("#pane2").slideDown("slow");
+  });
+  
+       $(".delete_entity").click(function(){
+        var confirmed=confirm('You Are Sure Want Delete This Row');
+        if(!confirmed){
+            return false;
+            }
+     
+        });
+});
+</script>
+ 
+<style type="text/css"> 
+#panel,#flip
+{
+padding:5px;
+text-align:center;
+font-weight: bold;
+width: 10%;
+
+border:solid 1px #c3c3c3;
+}
+#panel
+{
+padding:50px;
+display:none;
+}
+</style>
+ 
+
+{% endblock %}

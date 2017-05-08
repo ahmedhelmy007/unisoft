@@ -1,0 +1,1 @@
+ALTER TABLE  `authorized_persons` CHANGE  `parant_id`  `agreement_id` INT( 11 ) NULL DEFAULT NULL

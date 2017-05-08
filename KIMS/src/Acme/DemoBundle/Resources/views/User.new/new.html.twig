@@ -1,0 +1,123 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Assets - User list{% endblock %}
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="row-fluid">
+  <div class="span12">
+
+    <div class="box">
+      <div class="tab-header">{% trans %}User creation{%endtrans%}<span class="pull-right"></span>
+      </div>
+     <form class="fill-up" action="{{ path('User_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+        {{ form_widget(form._token) }}
+              
+          <div class="row-fluid">
+          <div class="span6">
+            <div class="padded">
+             
+             <div class="input">
+                 <div style="color: red">{{ form_errors(form.username) }}</div>
+             {{form_widget(form.username) }}
+            <span class="input-error" data-title="please write a User Name" data-original-title="">
+                <i class="icon-info-sign"></i>&nbsp;&nbsp;&nbsp;
+           </span> 
+            </div> 
+              
+            
+            <div class="input">
+                <div style="color: red">{{ form_errors(form.first_name) }}</div>
+             {{form_widget(form.first_name) }}
+            <span class="input-error" data-title="please write a First Name" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+            <div class="input">
+                <div style="color: red">{{ form_errors(form.last_name) }}</div>
+            {{form_widget(form.last_name) }}
+            <span class="input-error" data-title="please write a Last Name" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+           <div class="input">  
+                <div style="color: red">{{ form_errors(form.password) }}</div>
+            {{form_widget(form.password) }}
+            </div>
+           
+     
+          </div>
+          </div>
+
+          <div class="span6">
+            <div class="padded" style="padding-bottom: 0">
+             <div class="input"> 
+                 <div style="color: red">{{ form_errors(form.mobile) }}</div>
+             {{form_widget(form.mobile) }}
+            <span class="input-error" data-title="please write a Mobile" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                    
+           <div class="input">
+                <div style="color: red">{{ form_errors(form.address) }}</div>
+            {{form_widget(form.address) }}
+            <span class="input-error" data-title="please write a Address" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+             <div class="input">
+                 <div style="color: red">{{ form_errors(form.city) }}</div>
+             {{form_widget(form.city) }}
+            <span class="input-error" data-title="please write a City" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>        
+            </div>        
+             <div class="input">    
+                 <div style="color: red">{{ form_errors(form.country) }}</div>
+             {{form_widget(form.country) }}
+              <span class="input-error" data-title="please write a Country" data-original-title="">
+            <i class="icon-info-sign"></i>&nbsp;&nbsp;&nbsp;
+            </span> 
+           
+             </div>            
+           
+                   
+                    
+    <br>                            
+    
+ </div></div></div>
+ <div class="form-actions">
+     
+  <button type="submit" class="button blue" >{% trans %}Create{%endtrans%}</button>
+  </form>   
+ <a href="{{ path('User') }}" class="button">{% trans %}Back to the list{% endtrans %}</a>
+ 
+      </form> 
+              
+            
+        </div>         
+       </div>
+              
+       </div>
+      
+      </div>
+        </div>
+
+ 
+{% endblock %}
+

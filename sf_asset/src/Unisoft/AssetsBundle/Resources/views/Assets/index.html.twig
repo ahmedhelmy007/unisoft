@@ -1,0 +1,66 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}{% trans %}Assets - list{% endtrans %} {% endblock %}
+
+{% block content %}
+
+<div class="row-fluid">
+    <div class="span12">
+       
+        <table class="table table-striped table-bordered box">
+            <thead>
+                <tr>
+                    <th colspan="6">{% trans %}Assets-list{% endtrans %} </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                   
+                    <th>{% trans %}<div align="center">Id{% endtrans %}</div> </th>
+                    <th>{% trans %}<div align="center">Asset serial{% endtrans %}</div></th>
+                    <th>{% trans %}<div align="center">Manual code{% endtrans %}</div></th>
+                    <th>{% trans %}<div align="center">English name{% endtrans %}</div></th>
+                    <th>{% trans %}<div align="center">Arabic name{% endtrans %}</div></th>
+                    <th>{% trans %}<div align="center">Edit{% endtrans %}</div></th>
+                    
+                        {% set count = 0 %}
+                        {% for entity in entities  %}
+                        {% set count = count+1 %}
+                    <tr>
+                        
+                        <td><div align="center">{{ count }}</div></td>
+                        <td><div align="center">{{ entity.assetSerial }}</div></td>
+                        <td><div align="center">{{ entity.manualCode }}</div></td>
+                        <td><div align="center">{{ entity.englishName }}</div></td>
+                        <td><div align="center">{{ entity.arabicName }}</div></td>
+                        <td><div align="center"><a class="button icon-edit" href="{{ path('assets_edit', { 'id': entity.id }) }}">{% trans %} Edit{%endtrans%}</a></div></td>
+
+                    </tr>
+    {% endfor %}
+                    {% if entities is empty %}
+                      <tr><td colspan="6">{% trans %} there is no Assets{% endtrans %}</td></tr>
+                    {% endif %}
+               
+                </tbody>
+                <tfoot>
+                    <tr>                               
+                      <td colspan="6">
+    
+                        
+                          <div id="fix-stats">
+                              <p>
+                                <a href="{{ path('assets_new') }}" class="button blue">{% trans %}Create{% endtrans %} </a>
+                                
+                                 </p>
+                           
+                       </div>
+                   
+                             
+                              
+                        </td>
+                    </tr>                
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

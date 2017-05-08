@@ -1,0 +1,27 @@
+{% block title %}{{print_title}}{% endblock %}
+<style>
+.draw{
+
+background: #eee center; 
+font-weight: bold;
+}
+.size{
+    width: 40%;
+
+}
+    
+    </style>
+
+          <table  width="60%" border="1">
+              {% for key, value in properties %} 
+              <tr>
+                  <td class="draw size">{{form_label(attribute(edit_form, key)) }}</td>
+                  <td>{{ attribute(entity, key) }}</td>
+              </tr>
+              {% endfor %}
+          </table>
+
+     
+   
+<a href="#" onclick="window.print()" class="button blue">{%trans%}print{%endtrans%}</a>
+     

@@ -1,0 +1,187 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Stores{% endblock %}
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice') %}
+            <div  class="alert alert-block alert-success fade in">
+               <h4 class="alert-heading">
+                        Success!
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+               </h4>
+                
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="left-sidebar2">
+<div class="row-fluid">
+    <!-- first -->
+  
+      <div class="widget">
+      <div class="widget-header">
+      <div class="title " data-icon="">
+       Stores
+       </div></div>
+      <div class="widget-body">
+ {#
+          {% block field_errors %}
+    {% if form.name.vars.errors|length > 0 %}
+        <span class="val-error">
+            {% for error in form.name.vars.errors %}
+                {{ error.messageTemplate|trans(error.messageParameters, 'validators')~'. ' }}
+            {% endfor %}
+        </span>
+    {% endif %}
+{% endblock field_errors %}
+   #}
+          <table class="table table-condensed table-striped table-bordered no-margin">
+           <tbody>
+               <tr style="font-weight: bold">
+                        <td class="widget-header" width="6%"><div align="center" style="font-size: 18px;">*</div></td>
+                        <td class="widget-header"><div align="center">Name</div></td>
+                        <td class="widget-header"><div align="center">Hieght</div></td>
+                        <td class="widget-header"><div align="center">Width</div></td> 
+                        <td class="widget-header"><div align="center">Length</div></td>
+                        <td class="widget-header"><div align="center">Size</div></td>
+                        <td class="widget-header"><div align="center">Status</div></td>
+                        
+                        {% for rentalPeriod in rental_periods_objs %}
+                        <td class="widget-header"><div align="center">{{rentalPeriod.enName}}</div></td>
+             {% endfor %}
+                        
+                        <td class="widget-header"><div align="center">Edit</div></td>
+                        <td class="widget-header"><div align="center">Delete</div></td>
+                       
+                    </tr>
+                       
+                        {% set count = 0 %}
+                        {% for entity in entities  %}
+                        {% set count = count+1 %}
+                    <tr>
+                        <td><div align="center" style="font-size: 15px;">{{count}}</div></td>
+                        <td><div align="center">{{ entity.name }}</div></td>
+                        <td><div align="center">{{ entity.hieght }}</div></td>
+                        <td><div align="center">{{ entity.width }}</div></td>
+                        <td><div align="center">{{ entity.length }}</div></td>
+                        <td><div align="center">{{ entity.size }}</div></td>
+                        <td><div align="center">
+                                {% if entity.status==1%}Available{% endif %}
+                                {% if entity.status==2%}Rented{% endif %}
+                                {% if entity.status==3%}Resevation{% endif %}
+                                {% if entity.status==4%}Delay{% endif %}
+                                {% if entity.status==5%}Not Available{% endif %}
+                                {% if entity.status==6%}Company use{% endif %}
+                            </div></td>
+                        {% for rentalPeriod in rental_periods_objs %}
+            {% set myvalue="" %}
+        {% set myid=rentalPeriod.id %}
+            {% for storesRentalperiod in entity.storesRentalperiods %}
+            {% if storesRentalperiod.period.id== rentalPeriod.id %}
+        {% set myvalue=storesRentalperiod.price %} 
+                {% endif %} 
+             {% endfor %}
+             <td><div align="center">{{myvalue}}</div></td>
+             {% endfor %}
+                        
+                        
+                        <td><div align="center"><a class="icon-edit" title="Edit" href="{{ path('stores_edit', { 'id': entity.id }) }}"></a></div></td>
+                        <td><div align="center"><a href="?"><a class="delete_entity icon-trash" title="Delete" href="{{ path('stores_delete', { 'id': entity.id }) }}"></a></div></td>
+                        </tr>
+                    {% endfor %}  
+                        <div class="wrapper_btn">
+                    <div id="flip" class="btn_div"><span class="fs1" aria-hidden="true" data-icon=""></span> <a href="javascript:;">New</a></div>
+  <div class="gallery clearfix button_new btn_div"><span class="fs1" aria-hidden="true" data-icon=""></span>
+  <a title="{%trans%}Search{%endtrans%}" href="{{ url('stores_search') }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto">Search</a>
+  </div>
+                        </div>                   
+                       <tr id="panel">
+                  <p></p>
+                  <form  action="{{ path('stores_create') }}" method="post" {{ form_enctype(form) }} novalidate="">
+                        {{ form_widget(form._token) }}
+                        <td><div align="center" style="font-size: 18px;">{{count+1}}</div></td>
+                        <td>{{form_widget(form.name, { 'attr': {'class': 'span3'} }) }}</td>
+                        <td>{{form_widget(form.hieght, { 'attr': {'class': 'span3'} }) }}</td>
+                        <td>{{form_widget(form.width, { 'attr': {'class': 'span3'} }) }} </td>
+                        <td>{{form_widget(form.length, { 'attr': {'class': 'span3'} }) }} </td>
+                        <td>{{form_widget(form.size, { 'attr': {'class': 'span3'} }) }} </td>
+                        <td>{{form_widget(form.status, { 'attr': {'class': 'span3'} }) }} </td>
+                        
+                        {% set x=0 %}
+{% for rentalPeriod in rental_periods_objs %}
+      {% set myvalue="" %}
+        {% set myid=rentalPeriod.id %}
+            {% for storesRentalperiod in form.storesRentalperiods %}
+    
+                {% if storesRentalperiod.period.get('value')== rentalPeriod.id %}
+        {% set myvalue=storesRentalperiod.price.get('value') %} 
+                {% endif %}    
+             {% endfor %}
+        <td>
+            <input type="hidden" value="{{myid}}" name="acme_demobundle_storestype[storesRentalperiods][{{x}}][period]" id="acme_demobundle_storestype_storesRentalperiods_{{x}}_period" class="short_input">
+            <input type="text" value="{{myvalue}}" name="acme_demobundle_storestype[storesRentalperiods][{{x}}][price]" id="acme_demobundle_storestype_storesRentalperiods_{{x}}_price" class="short_input" placeholder="Price">
+        </td>
+{% set x=x+1 %}   
+ {% endfor %}
+                        
+                        <td colspan="2"><div align="center" ><button class="btn btn-success" type="submit">Create</button></div></td>
+                    </form>
+                    </tr>
+                    
+                    
+                  </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="20" class="widget-header">
+                            <div class="clearfix" style="padding: 0 5px;">
+                                <div  class="pull-left">
+                             <div class="badge badge-info">Count {{count}}</div>                                </div> 
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+          </table>         
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideDown("slow");
+  });
+ 
+ {% if form_errors==1 %}
+     $("#panel").slideDown("slow");
+ {% endif %}    
+   
+       $(".delete_entity").click(function(){
+        var confirmed=confirm('You Are Sure Want Delete This Row');
+        if(!confirmed){
+            return false;
+            }
+     
+        });
+});
+</script>
+ 
+<style type="text/css"> 
+
+</style>
+ 
+
+
+
+
+
+{% endblock %}

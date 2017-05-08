@@ -1,0 +1,35 @@
+{% block title %}{% trans %}Administrations list{%endtrans%}{% endblock %}
+<style>
+.draw{
+
+background: #eee center; 
+font-weight: bold;
+}
+.size{
+    width: 40%;
+
+}
+    
+    </style>
+
+      <form  class="fill-up"  action="{{ path('administrations_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+          <table  width="60%" border="1">
+              <tr>
+                  <td class="draw size">{{form_label(edit_form.administrationNo) }}</td>
+                  <td>{{entity.administrationNo }}</td>
+              </tr>
+              <tr>
+                  <td class="draw">{{form_label(edit_form.arName) }}</td>
+                  <td>{{entity.arName}}</td>
+              </tr>
+              <tr>
+                  <td class="draw">{{form_label(edit_form.enName) }}</td>
+                  <td>{{entity.enName}}</td>
+              </tr>
+          </table>
+
+  </form> 
+     
+   
+<a href="#" onclick="window.print()" class="button blue">{%trans%}print{%endtrans%}</a>
+     

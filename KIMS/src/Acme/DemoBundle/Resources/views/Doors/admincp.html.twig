@@ -1,0 +1,86 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+
+{% block content %}
+<div class="left-sidebar">
+<div class="row-fluid">
+    
+     <div class="span6"></div>
+    
+              <div class="span6">
+                <div class="widget">
+                  <div class="widget-header">
+                    <div class="title">
+                       الابواب والمصروفات
+                    </div>
+                    </div>
+                  <div class="widget-body">
+ 
+                     <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+             
+           <tbody>
+                
+                    <tr style="font-size: 18px;">
+                        <td width="6%"><div align="center" >#</div></td>
+                        <td><div align="center"  >الابواب</div></td>
+                         <td><div align="center">تعديل</div></td>
+                        <td><div align="center">حذف</div></td>
+                       
+                         
+                       
+                    </tr>
+                        {% set count = 0 %}
+                        {% for entity in entities  %}
+                        {% set count = count+1 %}
+           
+           
+                    <tr style="font-size: 18px;">
+                        <td><div align="center" style="font-size: 18px;">{{ count}}</div></td>
+                        <td id="ahmed"><div align="center"><a href="{{ path('Doors_adminCpshow', { 'id': entity.id }) }}"><div style="font-size: 18px;">{{ entity.name }}</div></a></div></td>
+                        <td><div align="center"><a class="button icon-edit" href="{{ path('Doors_edit', { 'id': entity.id }) }}"></a></div></td>
+                        <td><div align="center"><a class="delete_entity button icon-trash" href="{{ path('Doors_delete', { 'id': entity.id }) }}"></a></div></td>   
+                             
+                        </tr>
+                     {% endfor %}
+                        </td>
+                    </tr>
+                    
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <div class="clearfix" style="padding: 0 5px;">
+                                <div class="pull-right " style="font-size: 18px;">
+                                    عدد الابواب  ( <div class="label label label-info">{{ count}}</div> )                                                                   
+                                </div> 
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+          </table>              
+          <br>
+           <a href="{{path('Doors_addAdminCp')}}" class="btn btn-success bottom-margin pull-right"style="margin-left:7px ">انشاء باب جديد</a>
+          <br><br>
+                  </div>
+                        
+                </div>
+              </div>
+            </div>
+    </div>
+
+
+ 
+   <script type="text/javascript" charset="utf-8">
+    $(".delete_entity").click(function(){
+        var confirmed=confirm('سوف يتم حذف هذا السجل');
+        if(!confirmed){
+            return false;
+            }
+     
+        });
+
+</script>
+           
+  
+{% endblock %}

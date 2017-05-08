@@ -1,0 +1,75 @@
+.custo{
+    margin-left: 23%;
+    margin-top: -3.2%;
+
+}
+
+.input_div{
+    float:left;
+    width:300px;
+    margin-right: 2px;
+}
+.input_search { 
+    display: table;
+    margin-left: 50px;
+}
+
+.input_form{
+    width: 90%;
+    height: 20px;
+}
+
+.button_new,#flip
+{
+    padding:5px;
+    text-align:center;
+    font-weight: bold;
+    width: 8%;
+
+    border:solid 1px #c3c3c3;
+}
+#panel
+{
+    padding:50px;
+    display:none;
+}
+
+.search1{
+    margin-left: 28.5%;
+    margin-top: -33.4px;
+}
+
+.wrapper_btn {
+    white-space: nowrap;
+/*    float:left;*/
+    clear: both;
+}
+
+.btn_div{
+    display: inline-block;
+    padding:5px;
+    text-align:center;
+    font-weight: bold;
+    width: 90px;
+    border:solid 1px #c3c3c3;
+}
+.btn_search{
+    display: inline-block;
+    padding:5px;
+    text-align:center;
+    font-weight: bold;
+    border:solid 0px #c3c3c3;
+}
+.btn_save{
+    border: 0px;
+    width: 60px;
+    background-color: #FFF;
+    text-align:center;
+    font-weight: bold;
+    color: #000;
+}
+.control-label-right {
+    width: 160px;
+    padding-top: 5px;
+    text-align: right;
+  }

@@ -1,0 +1,59 @@
+{% extends "AcmeDemoBundle::login.html.twig" %}
+{% block title %}Home{% endblock %}
+
+{% block login %}
+{% raw %}
+<script type="text/javascript">
+			function RunEXE() {
+				try {
+					var userAgent = navigator.userAgent.toLowerCase();
+					if (userAgent.indexOf("msie") != -1) {
+						var w = new ActiveXObject("WScript.Shell");
+
+w.Exec("D:\\UniSoft\\Personal\\personnel.exe");
+					}
+					else {
+						alert("من فضلك استخدم Internet Explorer");
+                                                return;
+					}
+
+
+				}
+				catch (ex) {
+					alert(ex.toString());
+				}
+			}
+                        
+                        function RunEXE2() {
+				try {
+					var userAgent = navigator.userAgent.toLowerCase();
+					if (userAgent.indexOf("msie") != -1) {
+						var w = new ActiveXObject("WScript.Shell");
+
+w.Exec("D:\\UniSoft \\health_forms\\forms.exe");
+					}
+					else {
+						alert("من فضلك استخدم Internet Explorer");
+                                                return;
+					}
+
+
+				}
+				catch (ex) {
+					alert(ex.toString());
+				}
+			}
+		</script>
+{% endraw %}
+    <div  align="center" style="color: black; font-size: 50px;margin-right: 5%; font-weight: bold">معهد الكويت للاختصاصات الطبية</div><br>
+    <div align="center" style="color: black; font-size: 20px;margin-right: 3%; font-weight: bold">
+        <img src="{{ asset('bundles/template/images/icon/new2.png') }}" />
+        <br><br>
+    </div>
+
+
+    <div  align="center" style="color: black; font-size: 30px;margin-right: 5%; font-weight: bold">
+        <a href="javascript:;" class="button" onclick="javascript:RunEXE();"><span>برنامج شئون موظفين</span></a> | 
+        <a href="javascript:;" class="button" onclick="javascript:RunEXE2();"> <span>  برنامج مكافات </span></a>    
+    </div>
+{% endblock %}

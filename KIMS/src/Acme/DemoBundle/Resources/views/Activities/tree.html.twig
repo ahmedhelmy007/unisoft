@@ -1,0 +1,29 @@
+{% for door in childs %} 
+{% set count = 0 %}
+{% for masroof in door.childs  %} 
+{% set count = count + masroof.price  %}
+  
+{% endfor %}
+   <tr>
+     <td><div class="table table-striped" style="font-size: 14px;font-weight: bolder;color: red">{{ door.name }}</div>
+     <div><a href="{{ path('Activities_edit', { 'id': door.id }) }}">{{ door.subName }}</a></div></td>
+     <td><div align="center">
+ {% if door.childs is defined %}
+ {% if door.childs|length %}
+  <div class="table table-striped" style="font-size: 18px;font-weight: bolder;color: red">{{count}}</div>
+ {% else %}
+ {{ door.price}}
+ {% endif %}
+ {% endif %}
+ </div></td>
+   </tr>
+
+{% if door.childs %}
+   {% include "AcmeDemoBundle:Activities:tree.html.twig" with {'childs': door.childs} %}
+{% endif %}
+        
+     
+{% endfor %}
+
+  
+

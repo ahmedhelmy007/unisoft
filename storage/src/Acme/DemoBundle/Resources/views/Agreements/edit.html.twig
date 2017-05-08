@@ -1,0 +1,134 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Agreements{% endblock %}
+{% block content %} 
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice') %}
+            <div  class="alert alert-block alert-success fade in">
+               <h4 class="alert-heading">
+                        Success!
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+               </h4>
+                
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="left-sidebar" style="margin-right: 0px;">
+    <div class="row-fluid">
+              <div class="span12">
+                <div class="widget">
+                  <div class="widget-header">
+                    <div class="title " data-icon="">
+                      Customers
+                    </div>
+                  </div>
+                   
+                        
+                 
+                        
+                  <div class="widget-body">
+
+                      <form action="{{ path('agreements_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} novalidate>
+    {{ form_widget(edit_form._token) }}
+        {{form_row(edit_form.agreementType) }}
+        {{form_row(edit_form.transactionType) }}
+        {{form_row(edit_form.agreementNo) }}
+        {{form_row(edit_form.quotaionNo) }}
+        {{form_row(edit_form.agreementDate) }}
+        {{form_row(edit_form.agreementDate) }}
+        <br>//=============================<br>
+         <div class="control-group">
+                        <label class="control-label">{{form_label(edit_form.customer.customerNo) }}</label>
+                        <div class="controls controls-row">{{form_widget(edit_form.customer.customerNo) }}
+                        </div>
+                      </div>
+                          
+                          
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(edit_form.customer.enName) }}</label>
+                        <div class="controls">
+                          {{form_widget(edit_form.customer.enName) }}
+                          <label class="radio inline">{{form_label(edit_form.customer.arName) }}</label>
+                          {{form_widget(edit_form.customer.arName) }}   
+                          
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(edit_form.customer.civilId) }}</label>
+                        <div class="controls">
+                          {{form_widget(edit_form.customer.civilId) }}
+                                
+                          <label class="radio inline">{{form_label(edit_form.customer.mobile) }}</label>
+                          {{form_widget(edit_form.customer.mobile) }}
+                         
+                          <label class="radio inline">{{form_label(edit_form.customer.phone) }}</label>
+                          {{form_widget(edit_form.customer.phone) }}
+                        
+                          <label class="radio inline">{{form_label(edit_form.customer.fax) }}</label>
+                          {{form_widget(edit_form.customer.fax) }}
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(edit_form.customer.email) }}</label>
+                        <div class="controls">
+                            {{form_widget(edit_form.customer.email) }}
+                          <label class="radio inline">{{form_label(edit_form.customer.nationality) }}</label>
+                       
+                          {{form_widget(edit_form.customer.nationality) }}
+                         
+                          <label class="radio inline">{{form_label(edit_form.customer.gender) }}</label>
+                          {{form_widget(edit_form.customer.gender) }}
+                          {# edit_form.vars.value.customer.gender #}
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(edit_form.customer.address) }}</label>
+                        <div class="controls">
+                            {{form_widget(edit_form.customer.address) }}
+                        </div>
+                      </div>
+        <br>//=============================<br>
+        
+        {{form_row(edit_form.sales) }}
+        {{form_row(edit_form.discountPolicies) }}
+        {{form_row(edit_form.agreementStatus) }}
+        {#form_row(edit_form.service)#}
+        <input type="hidden" name="acme_demobundle_agreementstype[service]" id="acme_demobundle_agreementstype_service" value="3">
+        
+    {#{{ form_widget(edit_form) }}#}
+    <p>
+        <button type="submit" name="Save">Edit</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('agreements') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('agreements_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+                      
+ </div>
+                </div>
+              </div>
+        </div>
+</div>
+{% endblock %}

@@ -1,0 +1,222 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="left-sidebar">
+<div class="row-fluid">
+    <!-- first -->
+   
+      <div class="widget">
+      <div class="widget-header">
+      <div class="title ">
+        New Home
+       </div></div>
+      <div class="widget-body">
+          <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+           <tbody>
+               <tr style="font-weight: bold">
+                        <td class="widget-header" width="6%"><div align="center" style="font-size: 18px;">*</div></td>
+                        <td class="widget-header"><div align="center">one</div></td>
+                        <td class="widget-header"><div align="center">tow</div></td>
+                        <td class="widget-header"><div align="center">three</div></td> 
+                        <td class="widget-header"><div align="center">four</div></td>
+                       
+                    </tr>
+                       
+           
+                    <tr>
+                        <td><div align="center" style="font-size: 18px;">2</div></td>
+                        <td><div align="center"><a href="?">sssss</a></div></td>
+                        <td><div align="center"><a href="?">sssss</a></div></td>
+                        <td><div align="center"><a href="?">sssss</a></div></td>
+                        <td><div align="center"><a href="?">sssss</a></div></td>
+                        </tr>
+                    
+                        </td>
+                    </tr>
+                    
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="8" class="widget-header">
+                            <div class="clearfix" style="padding: 0 5px;">
+                                <div  class="pull-left">
+                                    <font color='#b3b3b3'>Count</font> :&nbsp; <div class="label label label-info">1</div>                                                                 
+                                </div> 
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+          </table>         
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+
+<div class="right-sidebar">
+            
+            <div class="wrapper">
+              <ul class="stats">
+                <li>
+                  <div class="left">
+                    <h4>
+                      15,859
+                    </h4>
+                    <p>
+                      Unique Visitors
+                    </p>
+                  </div>
+                  <div class="chart">
+                    <span id="unique-visitors"><canvas style="display: inline-block; width: 69px; height: 30px; vertical-align: top;" width="69" height="30"></canvas></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left">
+                    <h4>
+                      $47,830
+                    </h4>
+                    <p>
+                      Monthly Sales
+                    </p>
+                  </div>
+                  <div class="chart">
+                    <span id="monthly-sales"><canvas style="display: inline-block; width: 69px; height: 30px; vertical-align: top;" width="69" height="30"></canvas></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left">
+                    <h4>
+                      $98,846
+                    </h4>
+                    <p>
+                      Current balance
+                    </p>
+                  </div>
+                  <div class="chart">
+                    <span id="current-balance"><canvas style="display: inline-block; width: 69px; height: 30px; vertical-align: top;" width="69" height="30"></canvas></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left">
+                    <h4>
+                      18,846
+                    </h4>
+                    <p>
+                      Registrations
+                    </p>
+                  </div>
+                  <div class="chart">
+                    <span id="registrations"><canvas style="display: inline-block; width: 69px; height: 30px; vertical-align: top;" width="69" height="30"></canvas></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left">
+                    <h4>
+                      22,571
+                    </h4>
+                    <p>
+                      Site Visits
+                    </p>
+                  </div>
+                  <div class="chart">
+                    <span id="site-visits"><canvas style="display: inline-block; width: 69px; height: 30px; vertical-align: top;" width="69" height="30"></canvas></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <hr class="hr-stylish-1">
+            
+            
+          </div>
+
+
+<form id="ajaxForms" >
+    <p class="clone">
+        <input type="text">&nbsp;<input type="text">
+       <p><a href="#" class="add" rel=".clone">Add More</a></p>
+</form>
+
+
+<form id="multi">
+    <div>
+        <label>Tag</label>
+        <input type="text" id="extras[0]">
+                    
+        <a href="#" data-action="add">add</a>
+        <a href="#" data-action="delete">delete</a>
+    </div>
+    <input type="submit" value="save" >
+</form>
+
+
+
+
+<script>
+    jQuery(function($) {
+
+    var multiTags = $("#multi");
+
+    function handler(e) {
+        var jqEl = $(e.currentTarget);
+      var tag = jqEl.parent();
+        switch (jqEl.attr("data-action")) {
+        case "add":
+                var newTag = tag.clone();
+                var i = $("#multi").find("input").length;
+                console.log(i);
+                 newTag.find("input").attr("id", 'extras['+i+']');              
+            tag.after(newTag.find("input").val("").end());
+            break;
+        case "delete":
+            tag.remove();
+            break;
+        }
+        return false;
+    }
+
+    function save(e) {
+        var tags = multiTags.find("input.tag").map(function() {
+            return $(this).val();
+        }).get().join(',');
+        alert(tags);
+        return false;
+    }
+
+    multiTags.submit(save).find("a").live("click", handler);
+});
+    
+    
+    
+    
+    
+(function($) {
+    
+    function remove(){
+    $('.clone').each(function(i){
+           var input= $(this);
+            input.find('a.remove').click(function(){
+              input.remove();
+           });
+         });
+    }
+    
+    $('form').each(function(i){
+          var form = $(this);
+          var removeLink = '<a class="remove" href="#"><img src="{{asset('bundles/template/images/icon/rem.png')}}"</a>';
+          var iputclone = form.find('p.clone').append(removeLink);
+          
+          form.find('a.add').click(function(){
+              iputclone.clone().insertBefore(this);
+              remove();
+          });
+        });
+    
+
+})(jQuery);
+    
+    </script>
+
+{% endblock %}

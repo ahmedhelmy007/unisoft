@@ -1,0 +1,39 @@
+_home:
+    resource: "@AcmeDemoBundle/Controller/HomeController.php"
+    type:     annotation
+
+_stores:
+    resource: "@AcmeDemoBundle/Controller/StoresController.php"
+    type:     annotation
+
+_RentalPeriods:
+    resource: "@AcmeDemoBundle/Controller/RentalPeriodsController.php"
+    type:     annotation
+
+_Nationalities:
+    resource: "@AcmeDemoBundle/Controller/NationalitiesController.php"
+    type:     annotation
+
+#_SalesPerson:
+#    resource: "@AcmeDemoBundle/Controller/SalesPersonController.php"
+#    type:     annotation
+    
+_Customers:
+    resource: "@AcmeDemoBundle/Controller/CustomersController.php"
+    type:     annotation
+    
+#_Agreements:
+#    resource: "@AcmeDemoBundle/Controller/AgreementsController.php"
+#    type:     annotation
+#    
+#_Quotations:
+#    resource: "@AcmeDemoBundle/Controller/QuotationsController.php"
+#    type:     annotation
+#    
+#_AgreementsStores:
+#    resource: "@AcmeDemoBundle/Controller/AgreementsStoresController.php"
+#    type:     annotation 
+#    
+#_ItemsDescription:
+#    resource: "@AcmeDemoBundle/Controller/ItemsDescriptionController.php"
+#    type:     annotation     

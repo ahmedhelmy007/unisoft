@@ -1,0 +1,157 @@
+<html>
+    <head>
+    
+        <link href="{{ asset('bundles/template/css/application.css') }}" media="screen" rel="stylesheet" type="text/css" />
+       
+        <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+    </head>
+
+{% block content %}
+
+<table class="table-bordered">
+    <tbody>
+        <tr>
+            <td>Id</td>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <td>Assetserial</td>
+            <td>{{ entity.assetSerial }}</td>
+        </tr>
+        <tr>
+            <td>Manualcode</td>
+            <td>{{ entity.manualCode }}</td>
+        </tr>
+        <tr>
+            <td>Englishname</td>
+            <td>{{ entity.englishName }}</td>
+        </tr>
+        <tr>
+            <td>Arabicname</td>
+            <td>{{ entity.arabicName }}</td>
+        </tr>
+         
+          <tr>
+            <td>category</td>
+            <td>{{ entity.category.englishMame }}</td>
+        </tr>
+        <tr>
+            <td>brand</td>
+            <td>{{ entity.brand.englishMame }}</td>
+        </tr>
+       
+        <tr>
+            <td>Purchaseinvoiceno</td>
+            <td>{{ entity.purchaseInvoiceNo }}</td>
+        </tr>
+        <tr>
+            <td>Quantity</td>
+            <td>{{ entity.quantity }}</td>
+        </tr>
+        <tr>
+            <td>Purchasedate</td>
+            <td>{{ entity.purchaseDate|date('Y-m-d H:i:s') }}</td>
+        </tr>
+       
+        <tr>
+            <td>Warrantycount</td>
+            <td>{{ entity.warrantyCount }}</td>
+        </tr>
+        <tr>
+            <td>Depreciationrate</td>
+            <td>{{ entity.depreciationRate }}</td>
+        </tr>
+        <tr>
+            <td>Assetaccountno</td>
+            <td>{{ entity.assetAccountNo }}</td>
+        </tr>
+        <tr>
+            <td>Accumulateddepaccno</td>
+            <td>{{ entity.accumulatedDepAccNo }}</td>
+        </tr>
+        <tr>
+            <td>Depreciationexpensesaccno</td>
+            <td>{{ entity.depreciationExpensesAccNo }}</td>
+        </tr>
+        <tr>
+            <td>Profitlossonsaleofassetsaccno</td>
+            <td>{{ entity.profitLossOnSaleOfAssetsAccNo }}</td>
+        </tr>
+        
+        <tr>
+            <td>Purchasevalue</td>
+            <td>{{ entity.purchaseValue }}</td>
+        </tr>
+        <tr>
+            <td>Currentyearobdepreciationvalue</td>
+            <td>{{ entity.currentYearOBDepreciationValue }}</td>
+        </tr>
+        <tr>
+            <td>Currentyeardepreciationvalue</td>
+            <td>{{ entity.currentYearDepreciationValue }}</td>
+        </tr>
+        <tr>
+            <td>Valuechanges</td>
+            <td>{{ entity.valueChanges }}</td>
+        </tr>
+        <tr>
+            <td>Assetvalue</td>
+            <td>{{ entity.assetValue }}</td>
+        </tr>
+         <tr>
+            <td>Model</td>
+            <td>{{ entity.model }}</td>
+        </tr>
+        <tr>
+            <td>Image</td>
+            <td>{{ entity.image }}</td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>{{ entity.description }}</td>
+        </tr>
+        <tr>
+            <td>Submittedtodepreciation</td>
+            <td>{{ entity.submittedToDepreciation }}</td>
+        </tr>
+        <tr>
+            <td>Assetstatus</td>
+            <td>{{ entity.assetStatus }}</td>
+        </tr>
+        <tr>
+            <td>Automaticbarcode</td>
+            <td>{{ entity.automaticBarcode }}</td>
+        </tr>
+        <tr>
+            <td>Barcode</td>
+            <td>{{ entity.barcode }}</td>
+        </tr>
+        <tr>
+            <td>Rfid</td>
+            <td>{{ entity.rfid }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('assets') }}">
+           {% trans %}Back to the list{% endtrans %} 
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('assets_edit', { 'id': entity.id }) }}">
+            {% trans %}edit{% endtrans %}
+        </a>
+    </li>
+    <li> <button href="#" class="button " id="print_label" onclick="print()">
+            {% trans %} Print{% endtrans %}   
+                                             </button></li>
+    <li>
+        <form action="{{ path('assets_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+                <button type="submit" class="button">{% trans %}Delete{% endtrans %}</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

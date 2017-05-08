@@ -1,0 +1,21 @@
+<div class="form-actions">
+  <button type="submit" class="button blue" >{%trans%}Edit{%endtrans%}</button>
+    <div class="gallery clearfix print">  
+        {% if (controller_route=='Employees') %}
+        {% set print_action='Employees_print'%}
+            {% else %}
+            {% set print_action='SfServices_print'%}
+        {% endif %}
+            
+  <a href="{{path(print_action, { 'entity_name':entity_name,'id': entity.id })}}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" class="button blue">{%trans%}Print{%endtrans%}</a>
+   </div>
+ </form> 
+  <br>          
+           
+ <form  action="{{ path(controller_route~'_delete', { 'id': entity.id }) }}" method="post">
+  {{ form_widget(delete_form) }}
+ <button type="submit" class="button blue">{%trans%}Delete{%endtrans%}</button>
+ <a href="{{ path(controller_route) }}" class="button">{% trans %}Back to the list{% endtrans %}</a>
+ </form> 
+ 
+</div>

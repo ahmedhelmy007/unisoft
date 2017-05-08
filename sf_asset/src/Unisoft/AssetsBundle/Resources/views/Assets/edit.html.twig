@@ -1,0 +1,457 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}Assets - Home{% endblock %}
+
+{% block content %}
+
+    
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %}    
+<section id="main">
+
+        <div class="box">
+            <div class="tabbable blue-box">
+            <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">{% trans %}Assets{% endtrans %} </a></li>
+    <li class=""><a href="#tab2" data-toggle="tab">{% trans %}Helpdesk{% endtrans %} </a></li>
+    <li class=""><a href="#tab3" data-toggle="tab">{% trans %}Maintainace{% endtrans %} </a></li>
+    <li class=""><a href="#tab4" data-toggle="tab">{% trans %}Work Orders{% endtrans %} </a></li>
+    <li class=""><a href="#tab5" data-toggle="tab">{% trans %}Deprications{% endtrans %} </a></li>
+    <li class=""><a href="#tab6" data-toggle="tab">{% trans %}Notifictions{% endtrans %} </a></li>
+    <li class=""><a href="#tab7" data-toggle="tab">{% trans %}Reports{% endtrans %} </a></li>
+  </ul>
+  <div class="tab-content">
+      <form class="fill-up" action="{{ path('assets_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}novalidate>
+    <div class="container-fluid">
+    <div class="row-fluid">
+  <div class="span6">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="box">
+          <div class="tab-header">
+            {% trans %}Profit{% endtrans %}
+          </div>
+                <div class="tab-pane" id="tab1">
+          <div class="padded">
+     
+           <table>
+                  <tr><td> {{ form_label(edit_form.assetSerial) }}</td><td> {{ 
+form_widget(edit_form.assetSerial) }} 
+  <ul class="gallery clearfix">
+      <li><a class="assets_search" href="{{ url('assets_search', { 'keyword': 'param1','filed':'param2' }) }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_assetstype_englishName" fieldName="englishName">Search</a></li>
+  </ul>
+                              </td></tr>
+                  <tr><td> {{ form_label(edit_form.manualCode) }}</td><td>  
+                        {{form_widget(edit_form.manualCode) }}  </td></tr>
+                  <tr><td>  {{ form_label(edit_form.englishName) }}</td><td>   {{ 
+form_widget(edit_form.englishName) }}</td></tr>
+                  <tr><td>  {{ form_label(edit_form.arabicName) }}</td><td>  {{ 
+form_widget(edit_form.arabicName) }}</td></tr>
+                  <tr><td> {{ form_label(edit_form.category) }}    </td><td>    {{ 
+form_widget(edit_form.category) }}</td></tr>                          
+                  <tr><td> {{ form_label(edit_form.brand) }}    </td><td>    {{ 
+form_widget(edit_form.brand) }}</td></tr>   
+                 <tr><td> {{ form_label(edit_form.guardianshipName) }}    </td><td>    {{ 
+form_widget(edit_form.guardianshipName) }}
+ <ul class="gallery clearfix">
+     <li><a id="modiffy_owner" href="{{ url('assets_modiffyowner', { 'id': history_id,'asset_id':entity.id}) }}?iframe=true&amp;width=60%&height=80%" rel="prettyPhoto">Modiffy</a></li>
+  </ul>                            
+                             </td></tr>
+                <tr><td> {{ form_label(edit_form.location) }}    </td><td>    {{ 
+form_widget(edit_form.location) }}</td></tr>                 
+              </table>
+                        </div>
+        </div>
+      </div>
+    </div>
+</div>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="box">
+            <div class="tab-header">
+            {% trans %}Financial{% endtrans %}
+          </div>
+            <div class="padded">
+           <table>
+                  <tr><td> {{ form_label(edit_form.purchaseInvoiceNo) }}</td><td> {{ 
+form_widget(edit_form.purchaseInvoiceNo) }}</td></tr>
+                  <tr><td> {{ form_label(edit_form.quantity) }}</td><td>  {{ 
+form_widget(edit_form.quantity) }}  </td></tr>
+                  <tr><td>  {{ form_label(edit_form.purchaseDate) }}</td><td>   {{ 
+form_widget(edit_form.purchaseDate) }}</td></tr>
+                  <tr><td>  {{ form_label(edit_form.unit) }}</td><td>  {{ form_widget
+(edit_form.unit) }}</td></tr>
+                  <tr><td> {{ form_label(edit_form.cost) }}    </td><td>    {{ 
+form_widget(edit_form.cost) }}</td></tr>                          
+                  <tr><td> {{ form_label(edit_form.currency) }}    </td><td>    {{ 
+form_widget(edit_form.currency) }}</td></tr>   
+                 <tr><td> {{ form_label(edit_form.warrantyType) }}</td><td> {{ 
+form_widget(edit_form.warrantyType) }}</td></tr>
+               <tr><td>{{ form_widget(edit_form.warrantyCount) }}</td></tr>
+                <tr> <td>{{ form_widget(edit_form.warrantyUnit) }}</td>      
+               <td>{{ form_widget(edit_form.warrantyUnit2) }}</td></tr>        
+            </table>
+                     <ul class="recent-comments">
+                         <li class="separator">
+                        </li>
+                         
+                        <li class="separator" >
+                            
+                             <table>
+                                    <tr><td> {{ form_label(edit_form.depreciationMethod) 
+}}</td><td> {{ form_widget(edit_form.depreciationMethod) }}</td></tr>
+                                    <tr><td> {{ form_label(edit_form.depreciationRate) 
+}}</td><td>  {{ form_widget(edit_form.depreciationRate) }}  </td></tr>
+                                    <tr><td>  {{ form_label(edit_form.assetAccountNo) 
+}}</td><td>   {{ form_widget(edit_form.assetAccountNo) }}
+ <ul class="gallery clearfix">
+  <li><a class="assets_search" href="{{ url('assets_search', { 'keyword': 'param1','filed':'param2' }) }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_assetstype_assetAccountNo" fieldName="assetAccountNo">Search</a></li>
+  </ul>                                               
+                                                </td></tr>
+                                    <tr><td>  {{ form_label
+(edit_form.accumulatedDepAccNo) }}</td><td>  {{ form_widget
+(edit_form.accumulatedDepAccNo) }}
+  <ul class="gallery clearfix">
+  <li><a class="assets_search" href="{{ url('assets_search', { 'keyword': 'param1','filed':'param2' }) }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_assetstype_accumulatedDepAccNo" fieldName="accumulatedDepAccNo">Search</a></li>
+  </ul>                                              
+                                                </td></tr>
+                                    <tr><td> {{ form_label
+(edit_form.depreciationExpensesAccNo) }}    </td><td>    {{ form_widget
+(edit_form.depreciationExpensesAccNo) }}
+ <ul class="gallery clearfix">
+  <li><a class="assets_search" href="{{ url('assets_search', { 'keyword': 'param1','filed':'param2' }) }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_assetstype_depreciationExpensesAccNo" fieldName="depreciationExpensesAccNo">Search</a></li>
+  </ul>                                               
+                                                </td></tr>                          
+                                   <tr><td> {{ form_label
+(edit_form.profitLossOnSaleOfAssetsAccNo) }}    </td><td>    {{ form_widget
+(edit_form.profitLossOnSaleOfAssetsAccNo) }}</td></tr>
+                           </table>
+                      </li>
+                        <li class="separator">
+                              <table>
+                                    <tr><td> {{ form_label(edit_form.purchaseValue) }}
+</td><td> {{ form_widget(edit_form.purchaseValue) }}</td></tr>
+                                    <tr><td> {{ form_label
+(edit_form.currentYearOBDepreciationValue) }}</td><td>  {{ form_widget
+(edit_form.currentYearOBDepreciationValue) }}  </td></tr>
+                                    <tr><td>  {{ form_label
+(edit_form.currentYearDepreciationValue) }}</td><td>   {{ form_widget
+(edit_form.currentYearDepreciationValue) }}</td></tr>
+                                    <tr><td> {{ form_label(edit_form.valueChanges) }}    
+</td><td>    {{ form_widget(edit_form.valueChanges) }}</td></tr>                         
+ 
+                                   <tr><td> {{ form_label(edit_form.assetValue) }}    
+</td><td>    {{ form_widget(edit_form.assetValue) }}</td></tr>
+                           </table>
+                           
+                        </li>
+                      </ul>
+             </div>  
+      </div>
+    </div>
+</div>
+  </div>
+
+  <div class="span6">
+    <div class="row-fluid">
+         <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab11" data-toggle="tab">{% trans %}Asset Details{% endtrans %}</a></li>
+                    <li ><a href="#tab12" data-toggle="tab">{% trans %}Service Sheduling{% endtrans %}</a></li>
+         </ul>
+            <div class="tab-content">
+               <div class="tab-pane active" id="tab11">
+      <div class="span12">
+       <div class="box">
+           <div class="tab-header">
+              {% trans %}Asset Details{% endtrans %}
+           </div>
+            <div class="padded">
+               
+             <table>
+                           <tr><td> {{ form_label(edit_form.manufacturer) }}</td><td> {{ 
+form_widget(edit_form.manufacturer) }}
+    <ul class="gallery clearfix">
+  <li><a class="assets_search" href="{{ url('assets_search', { 'keyword': 'param1','filed':'param2' }) }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_assetstype_manufacturer" fieldName="manufacturer">Search</a></li>
+  </ul>                                       
+</td></tr>
+                                    <tr><td> {{ form_label(edit_form.vendor) }}</td><td> 
+ {{ form_widget(edit_form.vendor) }}
+<ul class="gallery clearfix">
+  <li><a class="assets_search" href="{{ url('assets_search', { 'keyword': 'param1','filed':'param2' }) }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_assetstype_vendor" fieldName="vendor">Search</a></li>
+  </ul>                                                    
+</td></tr>
+                                    <tr><td>  {{ form_label(edit_form.model) }}</td><td> 
+  {{ form_widget(edit_form.model) }}
+  <ul class="gallery clearfix">
+  <li><a class="assets_search" href="{{ url('assets_search', { 'keyword': 'param1','filed':'param2' }) }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_assetstype_model" fieldName="model">Search</a></li>
+  </ul>                                                   
+</td></tr>
+
+                                    <tr><td>{% trans %}Image{% endtrans %} {{ form_row(edit_form.imageName)}}</td><td colspan="2">   
+                                            <span id="mylink" style="width: 150px; height: 160px; border: 1px solid #000;display: inline-block;">
+                        <span  id="preview">
+                         {% if entity.getImageName%}    
+                              <img src="/sf_asset/web/upload/{{entity.getImageName}}" width="150" height="180">
+                          {%endif%}
+                             
+                        </span>
+                    </span>   
+                       </td></tr>
+                        <tr><td colspan="2"></td></tr>             
+                                    <tr><td>  {{ form_label(edit_form.description) }}
+</td><td>  {{ form_widget(edit_form.description) }}</td></tr>
+                                    <tr><td> {{ form_label
+(edit_form.submittedToDepreciation) }}</td><td>{{ form_widget
+(edit_form.submittedToDepreciation) }}</td></tr>                          
+                                   <tr><td> {{ form_label(edit_form.assetStatus) }}    
+</td><td>    {{ form_widget(edit_form.assetStatus) }}
+</td></tr>
+                           </table>
+  </div>
+</div>
+      
+      
+      <div class="span12">
+          
+        <div class="box" >
+            
+            <div class="tab-header">
+   {% trans %}Data Category{% endtrans %}
+  </div>
+            <div class="padded" >
+                <table class="table table-striped table-bordered box">
+  <thead>
+  <tr>
+    <th colspan="2">{% trans %}Data Category{% endtrans %}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td>{{ form_label(edit_form.category) }}</td>
+      <td> {{ form_widget(edit_form.category) }}</td>
+  </tr>
+  </tbody>
+  <tfoot>
+  
+  </tfoot>
+</table> 
+            
+</div>
+    </div>
+         
+      </div>
+      </div>
+                
+</div>
+    <div class="tab-pane" id="tab12">
+        <div class="span12">
+        <div class="box padded">
+          <div id='calendar'></div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+    <div class="row-fluid">
+      
+      <div class="span12">
+          
+        <div class="box" >
+            
+            <div class="tab-header">
+   {% trans %}Tracking Tags{% endtrans %} 
+  </div>
+            <div class="padded" >
+  
+       <table>
+                        <tr><td> {{ form_label(edit_form.automaticBarcode) }}</td><td> 
+{{ form_widget(edit_form.automaticBarcode) }}</td><td>
+                                        <button type="button" class="button " id="generate_barcode">
+            {% trans %} Generate Bar Code{% endtrans %}   
+                                             </button>
+                                      </td></tr>
+                        <tr><td> {{ form_label(edit_form.barcode) }}</td><td>  {{ 
+form_widget(edit_form.barcode) }}  </td></tr>
+                        <tr><td>  {{ form_label(edit_form.rfid) }}</td><td>   {{ 
+form_widget(edit_form.rfid) }}</td><td>
+                                        <button type="button" class="button " id="print_label" onclick="print()">
+            {% trans %} Print Label{% endtrans %}   
+                                             </button>
+                                      </td></tr>
+                       
+                </table>
+</div>
+    </div>
+         
+      </div>
+        
+    </div>
+
+  </div>
+     
+</div>
+         <div class="box padded">  
+      <p>
+        <button type="submit" class="button blue" >{% trans %}Edit{% endtrans %}</button>
+    </p>
+
+        <a href="{{ path('assets') }}" class="button blue" >
+            {% trans %}Back to the list{% endtrans %}
+        </a>
+    
+    <button type="button" id="delete_row" name="assets_delete" class="button large" style="height: 30px; color: black">Delete</button> </td></tr></table>                                    
+    
+        {{ form_widget(edit_form) }}
+         </div>       
+   </div></div></div></div>
+</section>
+  </form>
+          <div style="visibility: hidden">
+ <form action="{{ path('assets_delete', { 'id': entity.id }) }}" id="target" method="post" style="display: none">
+    {{ form_widget(delete_form) }}
+    <button type="submit">{% trans %}Delete{% endtrans %}</button>
+</form>
+</div>
+ <script type="text/javascript">
+     $('#rr').click(function() {
+  $('#target').submit();
+});
+$('#generate_barcode').click(function(){
+                   $('#unisoft_assetsbundle_assetstype_automaticBarcode').val($('#unisoft_assetsbundle_assetstype_assetSerial').val());
+            });
+              $('#print_label').click(function(){
+                 alert(  $('#unisoft_assetsbundle_assetstype_automaticBarcode').val());
+            });
+             if($('#unisoft_assetsbundle_assetstype_cost').val().length > 0){
+         $('#unisoft_assetsbundle_assetstype_purchaseValue').val($('#unisoft_assetsbundle_assetstype_cost').val());
+         $('#unisoft_assetsbundle_assetstype_purchaseValue').attr('readonly', true);
+           }
+           else{
+                $('#unisoft_assetsbundle_assetstype_purchaseValue').removeAttr('readonly');
+               
+               }
+        $('#unisoft_assetsbundle_assetstype_cost').keyup(function() { 
+       if($('#unisoft_assetsbundle_assetstype_cost').val().length > 0){
+         $('#unisoft_assetsbundle_assetstype_purchaseValue').val($('#unisoft_assetsbundle_assetstype_cost').val());
+         $('#unisoft_assetsbundle_assetstype_purchaseValue').attr('readonly', true);
+           }
+           else{
+                $('#unisoft_assetsbundle_assetstype_purchaseValue').removeAttr('readonly');
+                $('#unisoft_assetsbundle_assetstype_purchaseValue').val('');
+               }
+               });
+                
+     if( $('#unisoft_assetsbundle_assetstype_warrantyType_2:checked').val()!==undefined){
+         $('#unisoft_assetsbundle_assetstype_warrantyUnit').attr('disabled', true);
+     }
+     else{
+           $('#unisoft_assetsbundle_assetstype_warrantyUnit2').attr('disabled', true);
+         }
+      $('#unisoft_assetsbundle_assetstype_warrantyType_2,#unisoft_assetsbundle_assetstype_warrantyType_1').change(function() {
+ 
+   if( $('#unisoft_assetsbundle_assetstype_warrantyType_2:checked').val()!==undefined){
+    $('#unisoft_assetsbundle_assetstype_warrantyUnit').attr('disabled', true);
+     //alert($('#unisoft_assetsbundle_assetstype_warrantyType_2:checked').val());
+      $('#unisoft_assetsbundle_assetstype_warrantyUnit2').removeAttr('disabled');
+     }
+     if( $('#unisoft_assetsbundle_assetstype_warrantyType_1:checked').val()!==undefined){
+    $('#unisoft_assetsbundle_assetstype_warrantyUnit2').attr('disabled', true);
+     $('#unisoft_assetsbundle_assetstype_warrantyUnit').removeAttr('disabled');
+     }
+ });
+        </script>
+        
+        
+    <script type="text/javascript">
+    
+          var sampleData = [];
+
+          var sampleData = [];
+
+          var alldata = [];
+           $('#unisoft_assetsbundle_assetstype_category').live('change', function() {
+            $('#unisoft_assetsbundle_assetstype_brand').empty();
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "{{ path('assets') }}"+$(this).find(":selected").val()+"/json1",
+              }).done(function( data ) {
+                 $.each(data , function(key, val){
+                    
+                    $('#unisoft_assetsbundle_assetstype_brand').append($('<option></option>').val(val['id']).html(val['englishMame']));
+                      
+                   });
+         });  
+           
+                  });
+        </script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+$('#mylink').click(function(event) {
+    event.preventDefault();
+    window["link_clicked"] = true;
+    $('#unisoft_assetsbundle_assetstype_image').click();
+    window["link_clicked"] = false;     
+});
+
+$('.file_input').click(function(event) {
+    if (window["link_clicked"]) {
+        //alert("you clicked the link");
+    }
+    //event.preventDefault();
+});
+
+$('#unisoft_assetsbundle_assetstype_image').live('change', function()
+{ 
+    
+    $("#preview").html('');
+$("#preview").html('loding.....');
+$("#imageform").ajaxForm({
+dataType:  'json', 
+success:       processJson  // post-submit callback 
+}).submit();
+    
+    }); 
+    
+    function processJson(data) { 
+    // 'data' is the json object returned from the server 
+    $("#preview").html('');
+    $('#preview').prepend('<img id="theImg" width="170" height="200" src="{{ asset('upload') }}/'+data.imageName+'" />');
+    if(data.error==0){
+    $('#unisoft_assetsbundle_assetstype_imageName').val(data.imageName);
+    }else{
+        $("#preview").html(data.msg);
+        }
+    
+}
+});
+    </script>
+
+    <div style="visibility: hidden">
+        <form action="{{ path('assets_upload') }}" method="post" {{ form_enctype(upload_form) }} id="imageform">
+        {{ form_widget(upload_form) }}
+    </form>
+    </div>
+    
+<div style="visibility: hidden">
+<form action="{{ path('assets_delete', { 'id': entity.id }) }}" method="post" id="assets_delete">
+            {{ form_widget(delete_form) }}
+    </form> 
+       </div>
+{% endblock %}

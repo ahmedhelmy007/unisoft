@@ -1,0 +1,86 @@
+Acme\DemoBundle\Entity\RentalPeriods:
+    properties:
+        numberOfUnits:  
+                   
+                   - NotBlank: 
+                        message: Number Field  should not Be Empty.
+                   - Regex:
+                        pattern: "/^[0-9]+$/"
+                        match:   true
+                        message:  Number Field should be all Numbers
+       
+   
+Acme\DemoBundle\Entity\Stores:
+    properties:           
+        name:               
+               - NotBlank: 
+                      message: "Name Reqired"
+        size:               
+               - NotBlank: 
+                      message: "Size Reqired"
+        status:               
+               - NotBlank: 
+                      message: "Status Reqired" 
+                      
+Acme\DemoBundle\Entity\Customers:
+    properties:           
+        enName:               
+               - NotBlank: 
+                      message: "English Name should not Be Empty."
+        arName:               
+               - NotBlank: 
+                      message: "Arabic Name should not Be Empty."
+        civilId:               
+               - NotBlank: 
+                      message: "Civil ID should not Be Empty." 
+               - Regex:
+                        pattern: "/^[\d]{12}$/"
+                        match:   true
+                        message: Civil ID should be 12 number only
+                
+        mobile:               
+               - NotBlank: 
+                      message: "Mobile should not Be Empty."
+                      
+Acme\DemoBundle\Entity\Agreements:
+    properties: 
+        agreementNo:               
+               - NotBlank: { groups: [agreement] ,message: "AgreementNo should not Be Empty."}
+               - NotBlank: { groups: [quotation] ,message: "QuotationNo should not Be Empty."}       
+#                      message: "AgreementNo should not Be Empty."
+        agreementDate:               
+               - NotBlank: { groups: [agreement] ,message: "Agreement Date should not Be Empty."}             
+               - NotBlank: { groups: [quotation] ,message: "Quotation Date should not Be Empty."} 
+#        agreementDate:               
+#               - NotBlank:
+#                      message: "Agreement Date should not Be Empty."
+#               - Acme\DemoBundle\Validator\Constraints\ContainsAlphanumeric: ~       
+                
+#        totalArea:               
+#               - NotBlank: 
+#                      message: "Total Area should not Be Empty."
+##               - Type:
+##                      type: float
+##                      message: The value {{ value }} is not a valid {{ type }}.       
+#               - Regex:
+#                        pattern: "/^[0-9]{1,7}(?:\.[0-9]{1,2})?$/"
+#                        match:   true
+#                        message: Total Area should be all numbers                  
+        startDate:               
+               - NotBlank: { groups: [agreement] ,message: "Start Date should not Be Empty."}
+               - NotBlank: { groups: [quotation] ,message: "Start Date should not Be Empty."}        
+#                      message: "Start Date should not Be Empty."
+        rentalPeriod:               
+               - NotBlank: { groups: [agreement] ,message: "Rental Period should not Be Empty."}
+               - NotBlank: { groups: [quotation] ,message: "Rental Period should not Be Empty."}        
+#                      message: "Rental Period should not Be Empty."               
+        store:               
+               - Acme\DemoBundle\Validator\Constraints\ContainsCollectionSize: { groups: [agreement] ,message: "Please at least Add 1 room"}
+               - Acme\DemoBundle\Validator\Constraints\ContainsCollectionSize: { groups: [quotation] ,message: "Please at least Add 1 room"} 
+#                      message: "Please at least Add 1 room"
+        
+    getters:       
+        uniqeAgreement:               
+               - "True": { groups: [agreement] ,message: "Agreement Number Has This figure registered system before."}
+               - "True": { groups: [quotation] ,message: "Quotation Number Has This figure registered system before."}
+#                      message: Quotation Number Has This figure registered system before.

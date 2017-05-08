@@ -1,0 +1,15 @@
+_home:
+    resource: "@AcmeDemoBundle/Controller/HomeController.php"
+    type:     annotation
+    
+_users:
+    resource: "@AcmeDemoBundle/Controller/UserController.php"
+    type:     annotation    
+    
+_Doors:
+    resource: "@AcmeDemoBundle/Controller/DoorsController.php"
+    type:     annotation 
+    
+_Activities:
+    resource: "@AcmeDemoBundle/Controller/ActivitiesController.php"
+    type:     annotation 

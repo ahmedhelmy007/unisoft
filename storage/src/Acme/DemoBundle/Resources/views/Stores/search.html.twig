@@ -1,0 +1,112 @@
+<script src="{{ asset('bundles/template/js/bootstrap.js')}}"></script>
+    <script src="{{ asset('bundles/template/js/jquery.min.js')}}"></script>
+    <!-- bootstrap css -->
+    <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+    </script>
+    <link href="{{ asset('bundles/template/icomoon/style.css')}}" rel="stylesheet">
+    <!--[if lte IE 7]>
+    <script src="css/icomoon-font/lte-ie7.js">
+    </script>
+    <![endif]-->
+     <link href="{{ asset('bundles/template/css/main.ltr.css') }}" media="screen" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('bundles/template/css/wysiwyg/bootstrap-wysihtml5.css') }}" rel="stylesheet">
+{% block content %}
+     <div class="dashboard-wrapper">
+     <div class="left-sidebar2">
+<div class="row-fluid">
+    <!-- first -->
+      <div class="widget">
+      <div class="widget-header">
+      <div class="title " data-icon="">
+       Stores Search
+       </div></div>
+      <div class="widget-body">
+          
+        <form  action="{{ path('stores_search') }}" method="post" {{ form_enctype(search_form) }} novalidate="">
+                       {{ form_widget(search_form._token) }}
+              <div class="control-group">
+                        
+                        <div class="controls">
+                          {{form_widget(search_form.name) }}                     
+                          
+                          {{form_widget(search_form.size) }}                     
+                          
+                          {{form_widget(search_form.status) }}               
+                        </div>
+                      </div>
+                               <button class="btn btn-success" type="submit">Search</button>
+                       </form>
+          
+          <table class="table table-condensed table-striped table-bordered no-margin">
+           <tbody>
+               <tr style="font-weight: bold">
+                        <td class="widget-header" width="6%"><div align="center" style="font-size: 18px;">*</div></td>
+                        <td class="widget-header"><div align="center">Name</div></td>
+                        <td class="widget-header"><div align="center">Hieght</div></td>
+                        <td class="widget-header"><div align="center">Width</div></td> 
+                        <td class="widget-header"><div align="center">Length</div></td>
+                        <td class="widget-header"><div align="center">Size</div></td>
+                        <td class="widget-header"><div align="center">Status</div></td>
+                        
+                        {% for rentalPeriod in rental_periods_objs %}
+                        <td class="widget-header"><div align="center">{{rentalPeriod.enName}}</div></td>
+             {% endfor %}
+                        
+                        <td class="widget-header"><div align="center">Edit</div></td>
+                    </tr>
+                       
+                        {% set count = 0 %}
+                        {% for entity in entities  %}
+                        {% set count = count+1 %}
+                    <tr>
+                        <td><div align="center" style="font-size: 15px;">{{count}}</div></td>
+                        <td><div align="center">{{ entity.name }}</div></td>
+                        <td><div align="center">{{ entity.hieght }}</div></td>
+                        <td><div align="center">{{ entity.width }}</div></td>
+                        <td><div align="center">{{ entity.length }}</div></td>
+                        <td><div align="center">{{ entity.size }}</div></td>
+                        <td><div align="center">
+                                {% if entity.status==1%}Available{% endif %}
+                                {% if entity.status==2%}Rented{% endif %}
+                                {% if entity.status==3%}Resevation{% endif %}
+                                {% if entity.status==4%}Delay{% endif %}
+                                {% if entity.status==5%}Not Available{% endif %}
+                                {% if entity.status==6%}Company use{% endif %}
+                            </div></td>
+                        {% for rentalPeriod in rental_periods_objs %}
+            {% set myvalue="" %}
+        {% set myid=rentalPeriod.id %}
+            {% for storesRentalperiod in entity.storesRentalperiods %}
+            {% if storesRentalperiod.period.id== rentalPeriod.id %}
+        {% set myvalue=storesRentalperiod.price %} 
+                {% endif %} 
+             {% endfor %}
+             <td><div align="center">{{myvalue}}</div></td>
+             {% endfor %}
+                        
+                        
+                        <td><div align="center"><a class="icon-edit" title="Edit" href="{{ path('stores_edit', { 'id': entity.id }) }}" target="_top"></a></div></td>
+                        </tr>
+                    {% endfor %}  
+                        <div class="wrapper_btn">
+                        </div>                   
+                  </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="20" class="widget-header">
+                            <div class="clearfix" style="padding: 0 5px;">
+                                <div  class="pull-left">
+                             <div class="badge badge-info">Count {{count}}</div>                                </div> 
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+          </table>
+          
+                  </div>
+                </div>
+              </div>
+            </div>
+         </div>
+     
+{% endblock %}

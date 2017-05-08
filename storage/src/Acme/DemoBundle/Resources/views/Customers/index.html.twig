@@ -1,0 +1,87 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Customers list{% endblock %}
+{% block content %}
+
+
+<h1>Customers list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Customerno</th>
+            <th>Enname</th>
+            <th>Arname</th>
+            <th>Civilid</th>
+            <th>Mobile</th>
+            <th>Phone</th>
+            <th>Fax</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Contactperson</th>
+            <th>Contactmobile</th>
+            <th>Contactphone</th>
+            <th>Address</th>
+            <th>Region</th>
+            <th>Part</th>
+            <th>Gada</th>
+            <th>Street</th>
+            <th>House</th>
+            <th>Floor</th>
+            <th>Flat</th>
+            <th>Notes</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('customers_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.customerNo }}</td>
+            <td>{{ entity.enName }}</td>
+            <td>{{ entity.arName }}</td>
+            <td>{{ entity.civilId }}</td>
+            <td>{{ entity.mobile }}</td>
+            <td>{{ entity.phone }}</td>
+            <td>{{ entity.fax }}</td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.gender }}</td>
+            <td>{{ entity.contactPerson }}</td>
+            <td>{{ entity.contactMobile }}</td>
+            <td>{{ entity.contactPhone }}</td>
+            <td>{{ entity.address }}</td>
+            <td>{{ entity.region }}</td>
+            <td>{{ entity.part }}</td>
+            <td>{{ entity.gada }}</td>
+            <td>{{ entity.street }}</td>
+            <td>{{ entity.house }}</td>
+            <td>{{ entity.floor }}</td>
+            <td>{{ entity.flat }}</td>
+            <td>{{ entity.notes }}</td>
+            <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.modified %}{{ entity.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('customers_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('customers_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('customers_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+{% endblock %}

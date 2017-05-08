@@ -1,0 +1,81 @@
+<h1>SelfCustomers list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Address</th>
+            <th>Arname</th>
+            <th>Civilid</th>
+            <th>Contactmobile</th>
+            <th>Contactperson</th>
+            <th>Contactphone</th>
+            <th>Created</th>
+            <th>Customerno</th>
+            <th>Email</th>
+            <th>Enname</th>
+            <th>Fax</th>
+            <th>Flat</th>
+            <th>Floor</th>
+            <th>Gada</th>
+            <th>Gender</th>
+            <th>House</th>
+            <th>Mobile</th>
+            <th>Modified</th>
+            <th>Notes</th>
+            <th>Part</th>
+            <th>Phone</th>
+            <th>Region</th>
+            <th>Street</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('customers_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.address }}</td>
+            <td>{{ entity.arName }}</td>
+            <td>{{ entity.civilId }}</td>
+            <td>{{ entity.contactMobile }}</td>
+            <td>{{ entity.contactPerson }}</td>
+            <td>{{ entity.contactPhone }}</td>
+            <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.customerNo }}</td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.enName }}</td>
+            <td>{{ entity.fax }}</td>
+            <td>{{ entity.flat }}</td>
+            <td>{{ entity.floor }}</td>
+            <td>{{ entity.gada }}</td>
+            <td>{{ entity.gender }}</td>
+            <td>{{ entity.house }}</td>
+            <td>{{ entity.mobile }}</td>
+            <td>{% if entity.modified %}{{ entity.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.notes }}</td>
+            <td>{{ entity.part }}</td>
+            <td>{{ entity.phone }}</td>
+            <td>{{ entity.region }}</td>
+            <td>{{ entity.street }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('customers_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('customers_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('customers_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

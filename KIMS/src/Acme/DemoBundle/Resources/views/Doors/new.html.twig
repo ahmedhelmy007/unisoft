@@ -1,0 +1,38 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block content %}
+<div class="left-sidebar">
+<div class="row-fluid">
+    <div class="span6"></div>
+              <div class="span6">
+                <div class="widget">
+                  <div class="widget-header">
+                    <div class="title">
+                          <div class="label label label-important">{{entity.name}}</div> انشاء مصروف جديد تحت 
+                    </div>
+                    </div>
+                  <div class="widget-body">
+                       {% for entity in entities  %}
+                           {% endfor %}
+     <form action="{{ path('Doors_create') }}" method="post" {{ form_enctype(form) }}>                 
+                        {{ form_widget(form._token) }}
+                        {{form_widget(form.subName) }} 
+                        {{form_widget(form.balance) }}
+                        {{form_widget(form.price) }}      
+       <input type="hidden" id="acme_demobundle_doorstype_perant" name="acme_demobundle_doorstype[perant]" value={{entity.id}}>
+
+                 
+                    <p>
+       <button class="btn btn-success bottom-margin pull-right" type="submit" id="success" style="margin-left:7px ">حفظ</button>
+       <button type="reset"class="btn btn-warning bottom-margin pull-right" style="margin-left:7px ">ألغاء</button>
+       <a  class="btn btn-info bottom-margin" href="{{path('Doors_show',{'id':entity.id})}}" >الرجوع</a>
+       
+    </p><br>   
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{# extends "AcmeDemoBundle::layout.html.twig" #}
+
+     
+{% block content %}
+<script src="{{ asset('bundles/template/js/bootstrap.js')}}"></script>
+    <script src="{{ asset('bundles/template/js/jquery.min.js')}}"></script>
+    <!-- bootstrap css -->
+    <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+    </script>
+    <link href="{{ asset('bundles/template/icomoon/style.css')}}" rel="stylesheet">
+    <!--[if lte IE 7]>
+    <script src="css/icomoon-font/lte-ie7.js">
+    </script>
+    <![endif]-->
+     <link href="{{ asset('bundles/template/css/main.ltr.css') }}" media="screen" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('bundles/template/css/wysiwyg/bootstrap-wysihtml5.css') }}" rel="stylesheet">
+<div class="dashboard-wrapper">
+     <div class="left-sidebar2">
+<div class="row-fluid">
+    <!-- first -->
+      <div class="widget">
+      <div class="widget-header">
+      <div class="title " data-icon="">
+       Quotations Search
+       </div></div>
+      <div class="widget-body">
+<form action="{{ path('quotations_searchByQuotationNo') }}" method="post" {{ form_enctype(form) }} novalidate="">
+    {{ form_widget(form._token) }}
+    <div class="control-group">
+                        
+                        <div class="controls">
+                          {{form_widget(form.agreementNo) }}                     
+                          
+                          {{form_widget(form.agreementType) }}                     
+                          
+                          {{form_widget(form.agreementDate) }}               
+                          
+                          {{form_widget(form.agreementStatus) }}         
+                          
+                          
+                        </div>
+                      </div>
+    
+    <div class="control-group">
+                       
+                        <div class="controls">
+                          {{form_widget(form.startDate) }}
+                                {{form_widget(form.endDate) }}
+                                {{form_widget(form.rentalPeriod) }}
+                                {{form_widget(form.store) }}  
+                        </div>
+                      </div>
+        
+         <div class="control-group">
+                       
+                        <div class="controls">
+                          {{form_widget(form.customer.enName) }}
+                                {{form_widget(form.customer.arName) }}
+                        </div>
+                      </div>
+    
+        <button type="submit" class="button large" style="height: 30px; color: black">Search</button>
+</form>
+<table class="table table-condensed table-striped table-bordered no-margin">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Quotation No</th>
+            <th>Customer No</th>
+            <th>Customer Name E</th>
+            <th>Customer Name A</th>
+            <th>Status</th>
+            <th>Start Date</th>
+            <th>End tDate</th>
+            <th>Rental Period</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.id }}</td>
+            <td>{{ entity.agreementNo }}</td>
+            <td>{{ entity.customer.customerNo }}</td>
+            <td>{{ entity.customer.enName }}</td>
+            <td>{{ entity.customer.arName }}</td>
+            <td>{{ entity.agreementStatus }}</td>
+            <td>{{ entity.startDate|date('Y-m-d') }}</td>
+            <td>{{ entity.endDate|date('Y-m-d') }}</td>
+            <td>{{ entity.rentalPeriod.enName }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('quotations_edit', { 'id': entity.id }) }}" target="_top">show</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+              </div>
+                </div>
+              </div>
+            </div>
+         </div>
+{% endblock %}

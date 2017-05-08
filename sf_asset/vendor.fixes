@@ -1,0 +1,9 @@
+
+
+white_october_breadcrumbs
+-------------------------
+
+copy\replace these files from vendor.zip :
+
+/vendor/whiteoctober/breadcrumbs-bundle/WhiteOctober/BreadcrumbsBundle/Model/Breadcrumbs.php
+/vendor/whiteoctober/breadcrumbs-bundle/WhiteOctober/BreadcrumbsBundle/Model/SingleBreadcrumb.php

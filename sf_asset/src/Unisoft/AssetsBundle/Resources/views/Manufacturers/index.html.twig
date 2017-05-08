@@ -1,0 +1,69 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}{% trans %}Assets - Manufacturers list{%endtrans%}{% endblock %}
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+
+
+<div class="row-fluid">
+    <div class="span12">
+      
+        <table class="table table-striped table-bordered box " >
+                <thead>
+                    <tr>
+                        <th colspan="8">{% trans %}Manufacturers list{%endtrans%} </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                   
+                    <tr style="font-weight: bold">
+                        <td width="6%"><div align="center">#</div></td>
+                        <td><div align="center">{% trans %}Arabic Name{%endtrans%}</div></td>
+                        <td><div align="center">{% trans %}English Name{%endtrans%}</div></td>
+                        <td><div align="center">{% trans %}Manufacturers Number{%endtrans%}</div></td>
+                        <td><div align="center">{% trans %}E-mail{%endtrans%}</div></td>
+                        <td><div align="center">{% trans %}Edit{%endtrans%}</div></td>
+                       
+                    </tr>
+                        {% set count = 0 %}
+                        {% for entity in entities  %}
+                        {% set count = count+1 %}
+                         <tr>
+                             <td><div align="center">{{ count}}</div></td>
+                             <td><div align="center">{{ entity.arname }}</div></td>
+                             <td><div align="center">{{ entity.enname }}</div></td>
+                             <td><div align="center">{{ entity.manufacturerNo }}</div></td>
+                             <td><div align="center">{{ entity.email }}</div></td>
+                             <td><div align="center"><a class="button icon-edit" href="{{ path('Manufacturers_edit', { 'id': entity.id }) }}">{% trans %} Edit{%endtrans%}</a></div></td>
+                                 
+                             
+                        </tr>
+                     {% endfor %}
+                        </td>
+                    </tr>
+                    
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <div class="clearfix" style="padding: 0 5px;">
+                                <div class="pull-left">
+                                    <a href="{{ path('Manufacturers_new') }}" class="button blue" >{% trans %}Create{%endtrans%}</a>
+                                                                      
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% block content %}            
+  <form class="fill-up" id="form-content" action="{{ path('Categories_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+             
+          <button type="submit" class="button blue" >Create</button>
+   </form>  
+
+{% endblock %}

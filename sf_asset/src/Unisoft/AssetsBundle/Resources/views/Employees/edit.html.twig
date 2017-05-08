@@ -1,0 +1,235 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}{%trans%}Edit Employee{%endtrans%}{% endblock %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="row-fluid">
+  <div class="span12">
+    <div class="box">
+      <div class="tab-header">{%trans%}Edit Employee{%endtrans%}<span class="pull-right"></span>
+      </div>
+      <form  class="fill-up"  action="{{ path('Employees_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} novalidate >
+        {{ form_widget(edit_form._token) }}
+              
+          <div class="row-fluid">
+          <div class="span6">
+            <div class="padded">
+             
+             <div class="input">
+             {{form_widget(edit_form.employeeNo) }}
+             <span class="input-error" data-title="{%trans%}Can't write a Employee Number{%endtrans%}" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>  
+         <div class="gallery clearfix custo"> 
+         <a class="assets_search" title="{%trans%}Search For Employee Number{%endtrans%}" href="{{ url('SfServices_search', {'entity':'Employees','keyword': 'param1','filed':'param2' }) }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_employeestype_employeeNo" fieldName="employeeNo"><img  src="{{ asset('bundles/template/images/ss.png') }}" width="40" height="40" /></a>
+         </div>
+             </div>             
+            <div class="input">   
+            {{form_widget(edit_form.arName) }}
+            <span class="input-error" data-title="{% trans %}please write a Arabic Name{%endtrans%}" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>       
+            </div>
+            <div class="input">
+             {{form_widget(edit_form.enName) }}
+            <span class="input-error" data-title="{% trans %}Please write a English Name{%endtrans%}" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+                <div class="input">
+             {{form_widget(edit_form.administration) }}
+            </div>
+                <div class="input">
+             {{form_widget(edit_form.department) }}
+            </div>
+                <div class="input">
+             {{form_widget(edit_form.position) }}
+            </div>
+                 <div class="input">
+             {{form_widget(edit_form.costCenter) }}
+            </div>
+          </div></div>
+
+          <div class="span6">
+            <div class="padded" style="padding-bottom: 0;">       
+   
+                <div class="input">   
+             {{form_widget(edit_form.civilId) }}
+            <span class="input-error" data-title="please write a civil ID" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                <div class="input">   
+             {{form_widget(edit_form.passportId) }}
+            <span class="input-error" data-title="please write a passport ID" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                <div class="input">   
+             {{form_widget(edit_form.cellPhoneCode) }}
+            <span class="input-error" data-title="please write a cellPhoneCode" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                <div class="input">   
+             {{form_widget(edit_form.cellPhone) }}
+            <span class="input-error" data-title="please write a cellPhone" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                <div class="input">   
+             {{form_widget(edit_form.telephoneCode) }}
+            <span class="input-error" data-title="please write a telephoneCode" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                <div class="input">   
+             {{form_widget(edit_form.telephone) }}
+            <span class="input-error" data-title="please write a telephone" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                <div class="input">   
+             {{form_widget(edit_form.email) }}
+            <span class="input-error" data-title="please write a email" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                <div class="input">   
+             {{form_widget(edit_form.address) }}
+            <span class="input-error" data-title="please write a address" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                {{ form_widget(edit_form._token) }}
+                {{form_widget(edit_form.imageName) }}
+  
+                 <div class="input">
+                       <span id="mylink" style="width: 150px; height: 160px; border: 1px solid #000;display: inline-block;">
+                        <span  id="preview">
+                         {% if entity.getImageName%}    
+                              <img src="/sf_asset/web/upload/{{entity.getImageName}}" width="150" height="180">
+                          {%endif%}
+                            </span></span><br><br>
+    <a href="" >Browse</a> <a href="" >Delete</a>
+                     </div>
+
+</div></div>
+                 
+              </div>
+               <!-- Start render assets grid-->
+ <div style="position:relative;" class="box">
+<div class="tab-header">
+ Assets
+</div>
+<div role="grid" class="dataTables_wrapper" id="DataTables_Table_0_wrapper"><div class=""><div id="DataTables_Table_0_length" class="dataTables_length"><label>Show <select name="DataTables_Table_0_length" size="1" aria-controls="DataTables_Table_0"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div>
+    <table class="table table-striped data-table dataTable" id="DataTables_Table_0">
+<thead>
+<tr role="row"><th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 89px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"><div class="DataTables_sort_wrapper">Asset Name<span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span></div></th><th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 128px;" aria-label="Browser: activate to sort column ascending"><div class="DataTables_sort_wrapper">Check-in Date<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th></tr>
+</thead>
+
+<tbody role="alert" aria-live="polite" aria-relevant="all">
+ {% for entity in assetsEntity %}
+    <tr class="gradeA odd">
+  <td class="  sorting_1">{{entity.asset.englishName}}</td>
+  <td class=" ">{{entity.created|date("D M j g:i a")}}</td>
+  {% endfor %}
+</tr>
+
+</tbody></table>
+   </div>
+</div>     
+            <!-- End render assets grid--> 
+              {% include "UnisoftAssetsBundle:Elements:pagingWidget.html.twig" with {'pagingWidget': pagingWidget,'redirect_url':'Employees_edit'} %}
+             {% include "UnisoftAssetsBundle:Elements:actions.html.twig" with {'entity_name':'Employees','entity': entity,'controller_route':'Employees'} %}  
+        </div>
+      </div>
+        
+        
+        
+    </div>
+<script>
+    var arabic_changed=0; 
+    var english_changed=0;
+    
+    $("#unisoft_assetsbundle_administrationstype_arName").keyup(function () {
+       arabic_changed=1;
+   //    alert('arabic_changed:' +arabic_changed + ' and english_changed:' + english_changed);
+       if(english_changed == 0){
+           var value = $(this).val();
+          document.getElementById("unisoft_assetsbundle_administrationstype_enName").value =(value );
+       }
+    });
+
+  $("#unisoft_assetsbundle_administrationstype_enName").keyup(function () {
+    english_changed=1;
+       if(arabic_changed == 0){
+    var value = $(this).val();
+         document.getElementById("unisoft_assetsbundle_administrationstype_arName").value =(value );
+  }
+    });
+    
+    
+    
+    
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+$('#mylink').click(function(event) {
+      event.preventDefault();
+    window["link_clicked"] = true;
+    //$('#unisoft_assetsbundle_employeestype_image').click();
+    $('#form_image').click();
+    window["link_clicked"] = false;     
+});
+
+//$('#unisoft_assetsbundle_employeestype_image').live('change', function()
+$('#form_image').live('change', function()
+{ 
+    
+    $("#preview").html('');
+$("#preview").html('loding.....');
+$("#imageform").ajaxForm({
+dataType:  'json', 
+success:       processJson  // post-submit callback 
+}).submit();
+    
+    }); 
+    
+    function processJson(data) { 
+    // 'data' is the json object returned from the server 
+    $("#preview").html('');
+    $('#preview').prepend('<img id="theImg" width="170" height="200" src="{{ asset('upload') }}/'+data.imageName+'" />');
+    if(data.error==0){
+    $('#unisoft_assetsbundle_employeestype_imageName').val(data.imageName);
+    }else{
+        $("#preview").html(data.msg);
+        }
+    
+}
+    
+    });
+    </script>
+
+    <div style="visibility: hidden">
+        <form action="{{ path('Employees_upload') }}" method="post" {{ form_enctype(upload_form) }} id="imageform">
+        {{ form_widget(upload_form) }}
+    </form>
+    </div>
+        {% endblock %}

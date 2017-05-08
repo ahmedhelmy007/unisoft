@@ -1,0 +1,129 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}Assets - User list{% endblock %}
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="row-fluid">
+  <div class="span12">
+
+    <div class="box">
+      <div class="tab-header">{% trans %}User edit{%endtrans%}<span class="pull-right"></span>
+      </div>
+     <form  class="fill-up"  action="{{ path('User_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form._token) }}
+              
+          <div class="row-fluid">
+          <div class="span6">
+            <div class="padded">
+             
+             <div class="input">
+                 <div style="color: red">{{ form_errors(edit_form.username) }}</div>
+             {{form_widget(edit_form.username) }}
+            <span class="input-error" data-title="please write a User Name" data-original-title="">
+                <i class="icon-info-sign"></i>&nbsp;&nbsp;&nbsp;
+           </span> 
+            </div> 
+              
+            
+            <div class="input">
+                <div style="color: red">{{ form_errors(edit_form.first_name) }}</div>
+             {{form_widget(edit_form.first_name) }}
+            <span class="input-error" data-title="please write a First Name" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+            <div class="input">
+                <div style="color: red">{{ form_errors(edit_form.last_name) }}</div>
+            {{form_widget(edit_form.last_name) }}
+            <span class="input-error" data-title="please write a Last Name" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+                 <div class="input">    
+                 <div style="color: red">{{ form_errors(edit_form.country) }}</div>
+             {{form_widget(edit_form.country) }}
+              <span class="input-error" data-title="please write a Country" data-original-title="">
+            <i class="icon-info-sign"></i>&nbsp;&nbsp;&nbsp;
+            </span> 
+            </div>   
+                
+             </div>
+          </div>
+                  
+
+          <div class="span6">
+            <div class="padded" style="padding-bottom: 0">
+             <div class="input"> 
+                 <div style="color: red">{{ form_errors(edit_form.mobile) }}</div>
+             {{form_widget(edit_form.mobile) }}
+            <span class="input-error" data-title="please write a Mobile" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+                    
+           <div class="input">
+                <div style="color: red">{{ form_errors(edit_form.address) }}</div>
+            {{form_widget(edit_form.address) }}
+            <span class="input-error" data-title="please write a Address" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+             <div class="input">
+                 <div style="color: red">{{ form_errors(edit_form.city) }}</div>
+             {{form_widget(edit_form.city) }}
+            <span class="input-error" data-title="please write a City" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>        
+            </div>        
+                     
+           
+                   
+                    
+    <br>                            
+    
+ </div></div></div>
+ <div class="form-actions">
+     
+  <button type="submit" class="button blue" >{% trans %}Edit{%endtrans%}</button>
+  </form>  
+            <br>
+
+        <form  class="print" action="{{ path('User_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+                <button type="submit" class="button blue">Delete</button>
+        </form>
+ 
+       
+        </div>         
+       </div>
+              
+       </div>
+      
+      </div>
+        </div>
+
+ 
+{% endblock %}
+
+
+
+
+
+
+
+  

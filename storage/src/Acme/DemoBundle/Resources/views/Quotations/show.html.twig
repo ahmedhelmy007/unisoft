@@ -1,0 +1,109 @@
+<h1>Agreements</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Agreementno</th>
+            <td>{{ entity.agreementNo }}</td>
+        </tr>
+        <tr>
+            <th>Agreementtype</th>
+            <td>{{ entity.agreementType }}</td>
+        </tr>
+        <tr>
+            <th>Transactiontype</th>
+            <td>{{ entity.transactionType }}</td>
+        </tr>
+        <tr>
+            <th>Agreementid</th>
+            <td>{{ entity.agreementId }}</td>
+        </tr>
+        <tr>
+            <th>Agreementdate</th>
+            <td>{{ entity.agreementDate|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Discountpolicies</th>
+            <td>{{ entity.discountPolicies }}</td>
+        </tr>
+        <tr>
+            <th>Startdate</th>
+            <td>{{ entity.startDate|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Enddate</th>
+            <td>{{ entity.endDate|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Evacuationdate</th>
+            <td>{{ entity.evacuationDate|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Totalarea</th>
+            <td>{{ entity.totalArea }}</td>
+        </tr>
+        <tr>
+            <th>Rentalvalue</th>
+            <td>{{ entity.rentalValue }}</td>
+        </tr>
+        <tr>
+            <th>Insurancevalue</th>
+            <td>{{ entity.insuranceValue }}</td>
+        </tr>
+        <tr>
+            <th>Depositvalue</th>
+            <td>{{ entity.depositValue }}</td>
+        </tr>
+        <tr>
+            <th>Otherfees</th>
+            <td>{{ entity.otherFees }}</td>
+        </tr>
+        <tr>
+            <th>Totalvalue</th>
+            <td>{{ entity.totalValue }}</td>
+        </tr>
+        <tr>
+            <th>Offerdiscount</th>
+            <td>{{ entity.offerDiscount }}</td>
+        </tr>
+        <tr>
+            <th>Otherdiscount</th>
+            <td>{{ entity.otherDiscount }}</td>
+        </tr>
+        <tr>
+            <th>Netvalue</th>
+            <td>{{ entity.netValue }}</td>
+        </tr>
+        <tr>
+            <th>Created</th>
+            <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Modified</th>
+            <td>{{ entity.modified|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('agreements') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('agreements_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('agreements_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

@@ -1,0 +1,53 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+
+
+{% block content %}
+
+<script type="text/javascript">
+        $(document).ready(function(){
+                $("#browser").treeview({
+                        toggle: function() {
+                                console.log("%s was toggled.", $(this).find(">span").text());
+                        }
+                });
+                $(document).ready(function(){
+                $('#flip').click(function(){
+                  $("#panel").slideToggle("slow");
+                });
+});
+	
+        });
+    </script>
+    
+      <style type="text/css"> 
+
+#panel
+{
+
+padding:144px;
+display:none;
+}
+</style>
+ 
+ <div class="span3">
+        <div class="nav-menu box">
+            <ul class="nav nav-list" id="documentation-menu">
+<h1>Product creation</h1>
+
+<form action="{{ path('product_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('product') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+<div id="panel">Hello world!</div>
+            </ul></div></div>
+{% endblock %}

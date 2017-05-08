@@ -1,0 +1,145 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Rental Periods{% endblock %}
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice') %}
+            <div  class="alert alert-block alert-success fade in">
+               <h4 class="alert-heading">
+                        Success!
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+               </h4>
+                
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="left-sidebar2">
+<div class="row-fluid">
+    <!-- first -->
+   
+      <div class="widget">
+      <div class="widget-header">
+      <div class="title " data-icon="">
+       Rental Periods
+       </div></div>
+      <div class="widget-body">
+          <table class="table table-condensed table-striped table-bordered no-margin">
+           <tbody>
+               <tr style="font-weight: bold">
+                        <td class="widget-header" width="6%"><div align="center" style="font-size: 18px;">*</div></td>
+                        <td class="widget-header"><div align="center">English Name</div></td>
+                        <td class="widget-header"><div align="center">Arabic Name</div></td>
+                        <td class="widget-header"><div align="center">Type</div></td> 
+                        <td class="widget-header"><div align="center">Number</div></td>
+                        <td class="widget-header"><div align="center">Edit</div></td>
+                        <td class="widget-header"><div align="center">Delete</div></td>
+                    </tr>
+                        {% set count = 0 %}
+                        {% for entity in entities  %}
+                        {% set count = count+1 %}
+                    <tr>
+                        <td><div align="center" style="font-size: 15px;">{{count}}</div></td>
+                        <td><div align="center">{{ entity.enName }}</div></td>
+                        <td><div align="center">{{ entity.arname }}</div></td>
+                        <td><div align="center">{{ entity.unit }}</div></td>
+                        <td><div align="center">{{ entity.numberOfUnits }}</div></td>
+                        <td><div align="center"><a class="icon-edit" title="Edit" href="{{ path('rentalperiods_edit', { 'id': entity.id }) }}"></a></div></td>
+                        <td><div align="center"><a href="?"><a class="delete_entity icon-trash" title="Delete" href="{{ path('rentalperiods_delete', { 'id': entity.id }) }}"></a></div></td>
+                        </tr>
+                    {% endfor %}
+                       <div id="flip"><span class="fs1" aria-hidden="true" data-icon=""></span> New</div>
+                <tr id="panel">
+                  <p></p>
+                     <form action="{{ path('rentalperiods_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+                        {{ form_widget(form._token) }}
+                        <td><div align="center" style="font-size: 18px;">{{count+1}}</div></td>
+                        <td><div align="center">{{form_widget(form.enName) }}</div></td>
+                        <td><div align="center">{{form_widget(form.arName) }}</div></td>
+                        <td><div align="center">{{form_widget(form.unit) }}</div></td>
+                        <td><div align="center">{{form_widget(form.numberOfUnits)}}</div></td>
+                        <td colspan="2"><div align="center" ><button class="btn btn-success" id="btn" type="submit">Create</button></div></td>
+                    </form>
+                  </tr>
+               </tbody>
+               <tfoot>
+                    <tr>
+                        <td colspan="8" class="widget-header">
+                            <div class="clearfix" style="padding: 0 5px;">
+                                <div  class="pull-left">
+                                   <div class="badge badge-info">Count {{count}}</div>                                                                 
+                                </div> 
+                            </div>
+                        </td>
+                    </tr>
+               </tfoot>
+               </table>         
+              </div></div></div></div>
+<script> 
+    
+    
+    
+    
+    
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideDown("slow");
+  });
+ 
+    $(".delete_entity").click(function(){
+      var confirmed=confirm('You Are Sure Want Delete This Row');
+      if(!confirmed){
+         return false;
+       }
+        });
+        
+   
+        
+$("#btn").click(function() {
+  if ($('#acme_demobundle_rentalperiodstype_unit').val() === 'Day' && $('#acme_demobundle_rentalperiodstype_numberOfUnits').val() < 7 ) {        
+  alert("This number not match with day you can start with number 7");
+  return false;
+    }
+    
+   // if($('#acme_demobundle_rentalperiodstype_enName').val()==='' && $('#acme_demobundle_rentalperiodstype_arName').val() ===''){
+  //     alert('You Should write one column to completely create');
+              
+       // document.write("You Should write one column to completely create");
+       
+      
+     //   return false;
+  //  }
+});   
+         
+        
+});
+</script>
+<style type="text/css"> 
+#panel,#flip
+{
+padding:5px;
+text-align:center;
+font-weight: bold;
+width: 8%;
+
+border:solid 1px #c3c3c3;
+}
+#panel
+{
+padding:50px;
+display:none;
+}
+</style>
+ 
+
+
+
+
+{% endblock %}

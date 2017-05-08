@@ -1,0 +1,1 @@
+ALTER TABLE  `customers` ADD  `oracle_id` INT NOT NULL

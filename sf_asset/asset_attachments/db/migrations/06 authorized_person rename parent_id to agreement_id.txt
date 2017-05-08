@@ -1,0 +1,5 @@
+ALTER TABLE `authorized_persons`
+	DROP FOREIGN KEY `fk_authorized_persons_1`;
+ALTER TABLE `authorized_persons`
+	CHANGE COLUMN `parant_id` `agreement_id` INT(11) NULL DEFAULT NULL AFTER `id`,
+	ADD CONSTRAINT `fk_authorized_persons_1` FOREIGN KEY (`agreement_id`) REFERENCES `agreements` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION;

@@ -1,0 +1,86 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="left-sidebar">
+<div class="row-fluid">
+    <div class="span6"></div>
+              <div class="span6">
+                <div class="widget">
+                  <div class="widget-header">
+                    <div class="title">
+                     تعديل على حركة  
+                    </div>
+                    </div>
+                  <div class="widget-body">
+ <form  id="register-form"  class="fill-up" action="{{ path('Doors_editor', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} novalidate>
+                        {{ form_widget(edit_form._token) }}
+                        {{form_widget(edit_form.subName) }} 
+                        {{form_widget(edit_form.balance) }}
+                        {{form_widget(edit_form.price) }}      
+                        {{form_widget(edit_form.perant) }}
+        
+                    <p>
+       <button class="btn btn-success bottom-margin pull-right" type="submit" id="success" style="margin-left:7px">حفظ</button>
+       <button type="reset"class="btn btn-warning bottom-margin pull-right" style="margin-left:7px">ألغاء</button>
+        <a href="{{path('Doors')}}" class="btn btn-info pull-right">عودة الى الابواب</a>
+
+    </p><br>   
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+    
+ <script type="text/javascript" charset="utf-8">
+    $(".delete_entity").click(function(){
+        var confirmed=confirm('سوف يتم حذف هذا السجل');
+        if(!confirmed){
+            return false;
+            }
+     
+        });
+        
+    $("#register-form").submit(function(){
+            if($("#form_subName").val() != '' && $("#form_perant").val() == '') {
+                alert("يجب عليك ادخال المصروف تحت الباب المحدد");
+                 return false;
+            }
+            
+        
+        
+        
+        });
+    
+   $("#edit").click(function(){
+            if($("#form_subName").val()==""){
+                alert("يجب عليك ادخال اسم المصروف اولا");
+                $("#form_name").focus();
+       return false;
+                }
+      
+        });       
+    </script>
+    
+    
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

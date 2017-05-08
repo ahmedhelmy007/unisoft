@@ -1,0 +1,57 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}Assets - Employees list{% endblock %}
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<table class="table table-striped table-bordered box">
+    <thead>
+                <tr>
+                    <th colspan="6">{% trans %}Employees list{% endtrans %}</th>
+                    
+                </tr>
+        
+    </thead>
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('Employees_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.enName }}</td>
+                <td>{{ entity.active }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('Employees_show', { 'id': entity.id }) }}">{% trans %}show{% endtrans %}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('Employees_edit', { 'id': entity.id }) }}">{% trans %}Edit{% endtrans %}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+    {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <div class="clearfix" style="padding: 0 5px;">
+                        <div class="pull-left">
+                            <a href="{{ path('Employees_new') }}" class="button blue">{% trans %}Create{% endtrans %}</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

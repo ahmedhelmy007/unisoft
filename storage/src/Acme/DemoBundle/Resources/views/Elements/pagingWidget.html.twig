@@ -1,0 +1,14 @@
+<ul class="pager">
+        {% if pagingWidget.firstId %}
+      <li><a href="{{path(redirect_url,{'id':pagingWidget.firstId   })}}"><<</a></li>
+{% endif %}
+      {% if pagingWidget.previousId %}
+      <li><a href="{{path(redirect_url,{'id':pagingWidget.previousId   })}}">{%trans%}Previous{%endtrans%}</a></li>
+      {% endif %}
+{% if pagingWidget.nextId %}
+      <li><a href="{{path(redirect_url,{'id':pagingWidget.nextId   })}}">{%trans%}Next{%endtrans%}</a></li>
+      {% endif %}
+{% if pagingWidget.lastId %}
+      <li><a href="{{path(redirect_url,{'id':pagingWidget.lastId   })}}">>></a></li>
+      {% endif %}
+    </ul> 

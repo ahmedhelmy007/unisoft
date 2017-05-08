@@ -1,0 +1,501 @@
+Unisoft\AssetsBundle\Entity\Assets:
+    properties:
+        assetSerial:  
+                   - MaxLength: 20
+                   - NotBlank: 
+                        message: Asset Serial should not Be Blank.
+                   - Regex:
+                        pattern: "/^[0-9]+$/"
+                        match:   true
+                        message:  Asset Serial should be all numbers
+        manualCode:  
+                  - MaxLength: 30
+                  - Regex:
+                        pattern: "/^[A-Za-z0-9]+$/"
+                        match:   true
+                        message: Manual Code should be English Letters and Digits only
+        englishName:  
+                  - MaxLength: 40
+                  - NotBlank: 
+                        message: English Name should not Be Blank.
+                  - Regex:
+                        pattern: "/^[A-Za-z0-9 ]+$/"
+                        match:   true
+                        message: English Name should be English Letters and Digits only
+        arabicName:  
+                  - MaxLength: 40
+                  - NotBlank: 
+                        message: Arabic Name should not Be Blank.
+                  - Regex:
+                        pattern: "/^[\u0600-\u06FF\d ]+$/"
+                        match:   true
+                        message: Arabic Name should be English Letters and Digits only
+        category:  
+                 - NotBlank: 
+                        message: Category should not Be Blank.
+        brand:  
+                 - NotBlank: 
+                       message: Brand should not Be Blank.
+        location:  
+                - NotBlank: 
+                      message: Location should not Be Blank.
+        purchaseInvoiceNo:  
+                - MaxLength: 15
+                - NotBlank: 
+                      message: Purchase Invoice No should not Be Blank.
+                - Regex:
+                        pattern: "/^[0-9]+$/"
+                        match:   true
+                        message: Purchase Invoice No should be all numbers
+        quantity:  
+                   - MaxLength: 3
+                   - NotBlank: 
+                        message: Quantity should not Be Blank.
+                   - Regex:
+                        pattern: "/^[0-9]+$/"
+                        match:   true
+                        message: Quantity should be all numbers
+        purchaseDate:  
+                  - NotBlank: 
+                       message: Purchase Date should not Be Blank.
+        unit:  
+                  - NotBlank: 
+                       message: Unit should not Be Blank.
+        cost:  
+                  
+                  - MaxLength: 16
+                  - Regex:
+                        pattern: "/^-?(?:[0-9]+|[0-9]*\.[0-9]+)+$/"
+                        match:   true
+                        message: Cost should be all float numbers
+        currency:  
+                 - NotBlank: 
+                      message: Currency should not Be Blank.
+        barcode:
+                  - Regex:
+                        pattern: "/^[A-Za-z0-9]+$/"
+                        match:   true
+                        message: Bar Code should be English Letters and Digits only
+        automaticBarcode:
+                  - NotBlank: 
+                        message: Automatic Bar code should not Be Blank.
+                  - Regex:
+                        pattern: "/^[A-Za-z0-9]+$/"
+                        match:   true
+                        message: Automatic Bar code should be English Letters and Digits only
+        category:
+                 - NotBlank: 
+                      message: Category should not Be Blank.
+        description:
+                  - MaxLength: 150
+        assetValue: 
+                  - NotBlank: 
+                       message: Asset Value should not Be Blank.
+                  - MaxLength: 16
+                  - Regex:
+                        pattern: "/^-?(?:[0-9]+|[0-9]*\.[0-9]+)+$/"
+                        match:   true
+                        message: Asset Value should be all float numbers
+        valueChanges: 
+                  - NotBlank: 
+                       message:  value Changes  should not Be Blank.
+                  - MaxLength: 16
+                  - Regex:
+                        pattern: "/^-?(?:[0-9]+|[0-9]*\.[0-9]+)+$/"
+                        match:   true
+                        message: value Changes should be all float numbers
+        currentYearDepreciationValue :
+                   - NotBlank: 
+                        message: currentYear Depreciation Value should not Be Blank.
+                   - MaxLength: 16
+                   - Regex:
+                          pattern: "/^(?:[0-9]+|[0-9]*\.[0-9]+)+$/"
+                          match:   true
+                          message: current Year OB Depreciation Value should be all float numbers
+        currentYearOBDepreciationValue:
+                   - MaxLength: 16
+                   - Regex:
+                          pattern: "/^(?:[0-9]+|[0-9]*\.[0-9]+)+$/"
+                          match:   true
+                          message: current Year OB Depreciation Value should be all positive float numbers
+        purchaseValue :
+                   - NotBlank: 
+                          message: Purchase Value should not Be Blank.
+                   - MaxLength: 16
+                   - Regex:
+                          pattern: "/^(?:[0-9]+|[0-9]*\.[0-9]+)+$/"
+                          match:   true
+                          message: Purchase Value should be all positive float numbers
+        
+        profitLossOnSaleOfAssetsAccNo:
+                   - NotBlank: 
+                         message: profit/ Loss On Sale Of Assets Acc No should not Be Blank.
+                   - Regex:
+                        pattern: "/^[0-9]+$/"
+                        match:   true
+                        message: profit/ Loss On Sale Of Assets Acc No should be all numbers
+        depreciationExpensesAccNo:
+                   - NotBlank: 
+                         message: Depreciation Expenses AccNo should not Be Blank.
+                   - Regex:
+                        pattern: "/^[0-9]+$/"
+                        match:   true
+                        message: Depreciation Expenses AccNo should be all numbers
+        accumulatedDepAccNo:
+                   - NotBlank: 
+                        message: Accumulated DepAccNo should not Be Blank.
+                   - Regex:
+                        pattern: "/^[0-9]+$/"
+                        match:   true
+                        message: Accumulated DepAccNo should be all numbers
+        assetAccountNo:
+                   - NotBlank: 
+                        message: Asset Account No  should not Be Blank.
+                   - Regex:
+                        pattern: "/^[0-9]+$/"
+                        match:   true
+                        message: Asset Account No should be all numbers
+     
+        depreciationRate:
+                   - NotBlank: 
+                        message: Depreciation Rate should not Be Blank.
+                   - MaxLength: 4
+                   - Regex:
+                        pattern: "/^[0-9]+$/"
+                        match:   true
+                        message: Depreciation Rate should be all numbers
+                        
+Unisoft\AssetsBundle\Entity\Categories:
+    properties:
+        categoryNo:  
+                   - MaxLength: 20
+                   - NotBlank: 
+                        message: This Is Empty.
+                   
+        englishMame:  
+                   - MaxLength: 20
+                   - NotBlank: 
+                        message: This Is Empty.             
+                   
+        arabicName:  
+                   - MaxLength: 20
+                   - NotBlank: 
+                        message: This Is Empty.	
+                        
+
+Unisoft\AssetsBundle\Entity\Vendors:
+    properties:
+        vendorNo:  
+               - MaxLength: {limit: 9, message: "Vendor Number It should have 9 characters or less." }
+               - NotBlank: 
+                   message: Vendor Number Should Not Be Blank.
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message:  Vendor Number Should Be All Numbers                
+        arName:               
+               - MaxLength: {limit: 50, message: "Arabic Name It should have 50 characters or less." }
+               - NotBlank: 
+                      message: Arabic Name Should Not Be Blank.
+               - Regex:
+                      pattern: "/^\w+/"
+                      match:   true
+                      message:  Arabic Name Should only characters         
+               
+                   
+        enName:               
+               - MaxLength: {limit: 50, message: "English Name It should have 50 characters or less." }
+               - NotBlank: 
+                      message: English Name Should Not Be Blank.
+               - Regex:
+                      pattern: "/^\w+/"
+                      match:   true
+                      message:  English Name Should only characters         
+                         
+        country:               
+               - MaxLength: {limit: 20, message: "Country It should have 20 characters or less." }
+               - Regex: "/^\w+/"
+               
+              
+                     
+        faxNo:               
+               - MaxLength: {limit: 11, message: "Fax Number It should have 11 characters or less." }
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message: Fax Number Should Be All Numbers                
+                      
+        phoneNo:               
+               - MaxLength: {limit: 11, message: "Phone Number It should have 11 characters or less." }
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message: Phone Number Should Be All Numbers  
+                    
+        eMail:
+           - MaxLength: {limit: 50, message: "E-mail address It should have 50 characters or less." }
+           - Email:
+                message: E-mail address you entered is incorrect .. Please re-enter correctly  Like someone@example.anything.
+                checkMX: true
+        
+        website:  
+           - MaxLength: {limit: 100, message: " Web Site It should have 100 characters or less." }
+           - Url: 
+                message: The Web Site Must Be Like http://www.yourDomin.com .
+                
+       
+        importingFields: 
+             - MaxLength: {limit: 200, message: "Importing Fields It should have 200 characters or less." }
+            
+        authorized:    
+            - MaxLength: {limit: 100, message: "Authorized  It should have 100 characters or less." } 
+            
+        accountManager:    
+            - MaxLength: {limit: 50, message: "Account Manager  It should have 50 characters or less." } 
+        
+        accountNo:
+                - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message: Phone Number Should Be All Numbers 
+                    
+        codeFax:   
+          - MaxLength: {limit: 4, message: "Fax code It should have 4 characters or less." }
+          - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message: Code Fax Number Should Be All Numbers 
+        codePhone:   
+          - MaxLength:  {limit: 4, message: "Phone code It should have 4 characters or less." }
+          - Regex:
+                pattern: "/^[0-9]+$/"
+                match:   true
+                message: Code Phone Number Should Be All Numbers                
+               
+                      
+Unisoft\AssetsBundle\Entity\Manufacturers:
+   properties:
+        manufacturerNo:  
+               - MaxLength: {limit: 9, message: "Manufacturer Number It should have 9 characters or less." }
+               - NotBlank: 
+                   message: Manufacturer Number Should Not Be Blank.
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message:  Manufacturer Number Should Be All Numbers                
+        arName:               
+               - MaxLength: {limit: 50, message: " Arabic Name It should have 50 characters or less." }
+               - NotBlank: 
+                      message: Arabic Name Should Not Be Blank.
+               - Regex:
+                      pattern: "/^\w+/"
+                      match:   true
+                      message:  Arabic Name Should only characters      
+               
+                   
+        enName:               
+               - MaxLength: {limit: 50, message: " English Name It should have 50 characters or less." }
+               - NotBlank: 
+                      message: English Name Should Not Be Blank.
+               - Regex:
+                      pattern: "/^\w+/"
+                      match:   true
+                      message:  English Name Should only characters       
+                        
+        country:               
+               - MaxLength: {limit: 20, message: " Country It should have 20 characters or less." }
+               - Regex: "/^\w+/"
+               
+              
+                     
+        faxNo:               
+               - MaxLength: {limit: 11, message: " Fax Number It should have 11 characters or less." }
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message: Fax Number Should Be All Numbers                
+                      
+        phoneNo:               
+               - MaxLength: {limit: 11, message: " Phone Number It should have 11 characters or less." }
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message: Phone Number Should Be All Numbers  
+                    
+        eMail:
+           - MaxLength: {limit: 50, message: " E-mail address It should have 50 characters or less." }
+           - Email:
+                message: E-mail address you entered is incorrect .. Please re-enter correctly  Like someone@example.anything.
+                checkMX: true
+        
+        website:  
+           - MaxLength: {limit: 100, message: " Web Site It should have 100 characters or less." }
+           - Url: 
+                message: The Web Site Must Be Like http://www.yourDomin.com .
+                
+       
+        manufacturingFields: 
+            - MaxLength: {limit: 200, message: " Manufacturing Fields It should have 200 characters or less." }
+            
+        authorizedAgent:    
+            - MaxLength: {limit: 50, message: "Authorized Agent It should have 50 characters or less." }  
+            
+        manufacturingManager:    
+            - MaxLength: {limit: 50, message: "Manufacturing Manager It should have 50 characters or less." }   
+        
+        regionalManager:
+            - MaxLength: {limit: 50, message: "Regional Manager It should have 50 characters or less." }   
+                    
+        codeFax:   
+          - MaxLength: {limit: 4, message: "Fax code It should have 4 characters or less." }
+          - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message: Code Fax Number Should Be All Numbers 
+        codePhone:   
+          - MaxLength:  {limit: 4, message: "Phone code It should have 4 characters or less." }
+          - Regex:
+                pattern: "/^[0-9]+$/"
+                match:   true
+                message: Code Phone Number Should Be All Numbers             
+               
+Unisoft\AssetsBundle\Entity\Cost:
+  properties:
+        costCenterNo:  
+               - MaxLength: {limit: 9, message: "Cost Center Number It should have 9 characters or less." }
+               - NotBlank: 
+                   message: Cost Center Number Should Not Be Blank.
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message:  Cost Center Number Should Be All Numbers                
+        arName:               
+               - MaxLength: {limit: 50, message: " Arabic Name It should have 50 characters or less." }
+               - NotBlank: 
+                      message: "Arabic Name Should Not Be Blank"
+               - Regex:
+                      pattern: "/^\w+/"
+                      match:   true
+                      message:  Arabic Name Should only characters
+               
+        enName:               
+               - MaxLength: {limit: 50, message: " English Name It should have 50 characters or less." }
+               - NotBlank: 
+                      message: English Name Should Not Be Blank
+               - Regex:
+                      pattern: "/^\w+/"
+                      match:   true
+                      message:  English Name Should only characters
+               
+  
+  
+  
+                        
+Unisoft\AssetsBundle\Entity\Employees:
+    properties:
+        enName:  
+                   - NotBlank: 
+                        message: Employee name should not Be Blank.
+Unisoft\AssetsBundle\Entity\Locations:
+    properties:
+        name:  
+                   - NotBlank: 
+                        message: Location name should not Be Blank.
+
+Unisoft\AssetsBundle\Entity\AssetActivities:
+    properties:
+        changeInValue:
+                   - MaxLength: 20
+                   - NotBlank: 
+                        message: Value should not Be Blank.
+                   - Regex:
+                        pattern: "/^[0-9\.-]+$/"
+                        match:   true
+                        message: Value should be numbers
+                        
+Unisoft\AssetsBundle\Entity\EmployeeAssets:
+    properties:
+        moveId:  
+                   - NotBlank: 
+                        message: Move ID should not Be Blank.                        
+                   
+Unisoft\AssetsBundle\Entity\Administrations:
+    properties:
+        administrationNo:  
+               - MaxLength: { limit: 9, message: "This value is too long. It should have {{ limit }} digits or less" }
+               - NotBlank: 
+                   message: Administration Number Should Not Be Blank.
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message:  Administration Number Should Be All Numbers                
+        arName:               
+               - MaxLength:
+                      limit: 50
+                      message:  "This value is too long. It should have {{ limit }} characters or less"
+               - NotBlank: 
+                      message: "Arabic Name Should Not Be Blank"
+        enName:               
+               - MaxLength: 
+                      limit: 50
+                      message:  This value is too long. It should have {{ limit }} characters or less
+               - NotBlank: 
+                      message: English Name Should Not Be Blank
+               - Regex:
+                      pattern: "/^\w+/"
+                      match:   true
+                      message:  English Name Should only characters
+                      
+Unisoft\AssetsBundle\Entity\Departments:
+    properties:
+        departmentNo:  
+               - MaxLength: { limit: 9, message: "This value is too long. It should have {{ limit }} digits or less" }
+               - NotBlank: 
+                   message: Department Number Should Not Be Blank.
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message:  Department Number Should Be All Numbers                
+        arName:               
+               - MaxLength:
+                      limit: 50
+                      message:  "This value is too long. It should have {{ limit }} characters or less"
+               - NotBlank: 
+                      message: "Arabic Name Should Not Be Blank"
+        enName:               
+               - MaxLength: 
+                      limit: 50
+                      message:  This value is too long. It should have {{ limit }} characters or less
+               - NotBlank: 
+                      message: English Name Should Not Be Blank
+               - Regex:
+                      pattern: "/^\w+/"
+                      match:   true
+                      message:  English Name Should only characters   
+                      
+Unisoft\AssetsBundle\Entity\Position:
+    properties:
+        positionNo:  
+               - MaxLength: { limit: 9, message: "This value is too long. It should have {{ limit }} digits or less" }
+               - NotBlank: 
+                   message: Position Number Should Not Be Blank.
+               - Regex:
+                    pattern: "/^[0-9]+$/"
+                    match:   true
+                    message:  Position Number Should Be All Numbers                
+        arName:               
+               - MaxLength:
+                      limit: 50
+                      message:  "This value is too long. It should have {{ limit }} characters or less"
+               - NotBlank: 
+                      message: "Arabic Name Should Not Be Blank"
+        enName:               
+               - MaxLength: 
+                      limit: 50
+                      message:  This value is too long. It should have {{ limit }} characters or less
+               - NotBlank: 
+                      message: English Name Should Not Be Blank
+               - Regex:
+                      pattern: "/^\w+/"
+                      match:   true
+                      message:  English Name Should only characters                      

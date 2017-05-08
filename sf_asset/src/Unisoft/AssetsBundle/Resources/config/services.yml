@@ -1,0 +1,25 @@
+parameters:
+#    unisoft_assets.example.class: Unisoft\AssetsBundle\Example
+
+services:
+#    unisoft_assets.example:
+#        class: %unisoft_assets.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+#_request:
+#  class: Symfony\Component\HttpFoundation\Request
+  
+#Unisoft.AssetsBundle.twig.extension:
+#    class: Unisoft\AssetsBundle\Twig\Extension\UnisoftAssetsExtension
+#    arguments: ['@service_container']
+#    public: true
+#    scope: request
+#    tags:
+#      - { name: 'twig.extension' }
+
+  acme.twig.acme_extension:
+        class: Unisoft\AssetsBundle\Twig\UnisoftExtension
+        arguments:
+          - "@service_container"
+        tags:
+            - { name: twig.extension }

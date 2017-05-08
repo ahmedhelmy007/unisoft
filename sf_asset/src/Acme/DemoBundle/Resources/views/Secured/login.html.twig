@@ -1,0 +1,24 @@
+{% extends "UnisoftAssetsBundle::login.html.twig" %}
+{% block login %}
+  
+{% if error %}
+     <div  class="alert alert-message">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+               {{ error.message }}
+     </div>
+{% endif %}
+    
+     
+
+
+    <form action="{{ path("_security_check") }}" method="post" id="login">
+       <div class="input-group">
+      <input type="text" placeholder="Name" id="username" name="_username" value="{{ last_username }}" />
+      <input type="password" placeholder="Password" id="password" name="_password" />
+      
+      </div>
+         <button id="login-submit" type="submit" class="login-button">Login</button>
+    </form>
+{% endblock %}
+
+

@@ -1,0 +1,97 @@
+unisoft_assets_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: UnisoftAssetsBundle:Default:index }
+    
+_product:
+    resource: "@UnisoftAssetsBundle/Controller/ProductController.php"
+    type:     annotation
+#    prefix:   /product
+
+_Assets:
+    resource: "@UnisoftAssetsBundle/Controller/AssetsController.php"
+    type:     annotation
+    
+_AssetUnits:
+    resource: "@UnisoftAssetsBundle/Controller/AssetUnitsController.php"
+    type:     annotation
+    
+_Categories:
+    resource: "@UnisoftAssetsBundle/Controller/CategoriesController.php"
+    type:     annotation
+    
+_Currencies:
+    resource: "@UnisoftAssetsBundle/Controller/CurrenciesController.php"
+    type:     annotation
+    
+_DepreciationMethods:
+    resource: "@UnisoftAssetsBundle/Controller/DepreciationMethodsController.php"
+    type:     annotation
+    
+_Employees:
+    resource: "@UnisoftAssetsBundle/Controller/EmployeesController.php"
+    type:     annotation
+
+_Locations:
+    resource: "@UnisoftAssetsBundle/Controller/LocationsController.php"
+    type:     annotation
+    
+_Manufacturers:
+    resource: "@UnisoftAssetsBundle/Controller/ManufacturersController.php"
+    type:     annotation
+    
+_Vendors:
+    resource: "@UnisoftAssetsBundle/Controller/VendorsController.php"
+    type:     annotation
+    
+_WarrantyTypes:
+    resource: "@UnisoftAssetsBundle/Controller/WarrantyTypesController.php"
+    type:     annotation
+    
+_WarrantyUnits:
+    resource: "@UnisoftAssetsBundle/Controller/WarrantyUnitsController.php"
+    type:     annotation    
+ 
+_Home:
+    resource: "@UnisoftAssetsBundle/Controller/HomeController.php"
+    type:     annotation
+    
+_User:
+    resource: "@UnisoftAssetsBundle/Controller/UserController.php"
+    type:     annotation
+    
+_activities:
+    resource: "@UnisoftAssetsBundle/Controller/AssetActivitiesController.php"
+    type:     annotation
+    
+_Departments:
+    resource: "@UnisoftAssetsBundle/Controller/DepartmentsController.php"
+    type:     annotation
+
+_Administrations:
+    resource: "@UnisoftAssetsBundle/Controller/AdministrationsController.php"
+    type:     annotation
+    
+_Position:
+    resource: "@UnisoftAssetsBundle/Controller/PositionController.php"
+    type:     annotation
+    
+_Sectors:
+    resource: "@UnisoftAssetsBundle/Controller/SectorsController.php"
+    type:     annotation  
+    
+_EmployeeAssets:
+    resource: "@UnisoftAssetsBundle/Controller/EmployeeAssetsController.php"
+    type:     annotation 
+
+_Cost:
+    resource: "@UnisoftAssetsBundle/Controller/CostController.php"
+    type:     annotation 
+    
+_SfServices:
+    resource: "@UnisoftAssetsBundle/Controller/SfServicesController.php"
+    type:     annotation
+    
+_ManufactAdmin:
+    resource: "@UnisoftAssetsBundle/Controller"
+    type:     annotation
+    

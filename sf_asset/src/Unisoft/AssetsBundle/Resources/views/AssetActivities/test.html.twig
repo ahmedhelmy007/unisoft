@@ -1,0 +1,21 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}Activities - edit{% endblock %}
+
+{% block content %}
+
+    
+<h1>AssetActivities edit</h1>
+
+<form action="{{ path('activities_testUpdate', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+    <div class="padded">
+
+        <table>
+            <tr><td> {{ form_label(edit_form.changeInValue) }}</td><td> {{ form_widget(edit_form.changeInValue) }}</td></tr>
+        </table>
+    </div>    
+    <button type="submit" class="button blue">{% trans %}update{% endtrans %}</button>
+    <a href="{{ path('activities') }}" class="button">{% trans %}Back to the list{% endtrans %}</a>
+</form>
+
+{% endblock %}

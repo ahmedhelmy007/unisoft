@@ -1,0 +1,13 @@
+{% for child in childs %} 
+<li><a class="treeitem" data-toggle="modal" id="{{child.id}}" href="{{ path('Categories_edit', { 'id': child.id }) }}&#modalEditPerson1">{{ child.englishMame }}</a> 
+
+{% if child.childs %}
+        <ul>
+   {% include "UnisoftAssetsBundle:Categories:tree.html.twig" with {'childs': child.childs} %}
+            </ul>
+{% endif %}
+        </li> 
+     
+{% endfor %}
+        
+           

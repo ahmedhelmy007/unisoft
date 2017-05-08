@@ -1,0 +1,446 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Customer Quotation{% endblock %}
+{% block content %} 
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice') %}
+            <div  class="alert alert-block alert-success fade in">
+               <h4 class="alert-heading">
+                        Success!
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+               </h4>
+                
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="left-sidebar" style="margin-right: 0px;">
+    <div class="row-fluid">
+              <div class="span12">
+                <div class="widget">
+                  <div class="widget-header">
+                    <div class="title " data-icon="">
+                      Customer Quotation
+                    </div>
+                  </div>
+                   
+                        
+                 
+                        
+                  <div class="widget-body">
+
+                      <form id="submitForm" class="form-horizontal no-margin" action="{{ path('quotations_create', { 'customer_id': customer_id }) }}" method="post" {{ form_enctype(form) }} novalidate>
+    {{ form_widget(form._token) }}
+        {{form_row(form.agreementType) }}
+<div class="control-group">
+                        
+                        <div class="controls">
+                            <div class="wrapper_btn">
+                                <div class="btn_search">
+                                    <label class="control-label">{{form_label(form.agreementNo) }}</label>
+                        {{form_widget(form.agreementNo) }}
+                                </div>        
+                                        <div class="btn_search">
+                                <ul class="gallery clearfix">
+      <li><a class="assets_search" title="Search For Quotations" href="{{ url('quotations_searchByQuotationNo') }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto">
+          <img  src="{{ asset('bundles/template/images/ss.png') }}" width="40" height="40" />
+          </a></li>
+  </ul> 
+      </div>                     <div class="btn_search">         
+                          <label class="radio inline">{{form_label(form.agreementDate) }}</label>
+                          {{form_widget(form.agreementDate) }} 
+      </div>
+                          </div>     
+                        </div>
+                      </div>
+                              
+ {# Items Description#} 
+    <div class="widget-body"></div><br>
+    <div id="flip" class="btn btn-danger bottom-margin"><img src="{{ asset('bundles/template/images/icon/add.png') }}"/> Add</div>
+    <div class="widget-header">
+                    <div class="title " data-icon="">
+                      Description of Items Stored
+                    </div>
+                  </div>
+    <div class="widget-body">
+    <table class="table table-hover" id="count">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+               {% set count = 0 %}
+               {% for entity in entities  %}
+               {% set count = count+1 %}
+              <tbody>
+                <tr>
+                  <td>{{count}}</td>
+                  <td>{{entity.description}}</td>
+                  <td><a class="delete_entity icon-trash" title="Delete" href="{{ path('ItemsDescription_delete', { 'id': entity.id  }) }}"></a></td>
+                </tr>
+               {% endfor %}
+      
+          <tr id="panel">  
+              <td>{{count+1}}</td>
+             
+<td>
+<form id="ajaxForms" >
+    <p class="clone">
+          <input type="text" id="acme_demobundle_agreementstype_itemsDescription_{{count+1}}_description" name="acme_demobundle_agreementstype[itemsDescription][{{count+1}}][description]" required="required">
+       <p><a href="#" class="add" rel=".clone">Add More</a></p>
+</form>
+
+    </td><td colspan="2"></td>
+             </tr>
+                
+              </tbody>
+            </table>
+        </div>                                  
+        <!--<br>//=============================<br>-->
+         <div class="control-group">
+                        <label class="control-label">{{form_label(form.customer.customerNo) }}</label>
+                        <div class="controls controls-row">{{form_widget(form.customer.customerNo) }}
+                            
+                            <div class="btn_search">
+                                <ul class="gallery clearfix">
+      <li><a class="assets_search" title="Search For Customer" href="{{ url('quotations_searchByCustomer') }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto">
+          <img  src="{{ asset('bundles/template/images/ss.png') }}" width="40" height="40" />
+          </a></li>
+  </ul> 
+      </div>
+                        </div>
+                      </div>
+                          
+                          
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.customer.enName) }}</label>
+                        <div class="controls">
+                          {{form_widget(form.customer.enName) }}
+                          <label class="radio inline">{{form_label(form.customer.arName) }}</label>
+                          {{form_widget(form.customer.arName) }}   
+                          
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.customer.civilId) }}</label>
+                        <div class="controls">
+                          {{form_widget(form.customer.civilId) }}
+                                
+                          <label class="radio inline">{{form_label(form.customer.mobile) }}</label>
+                          {{form_widget(form.customer.mobile) }}
+                         
+                          <label class="radio inline">{{form_label(form.customer.phone) }}</label>
+                          {{form_widget(form.customer.phone) }}
+                        
+                          <label class="radio inline">{{form_label(form.customer.fax) }}</label>
+                          {{form_widget(form.customer.fax) }}
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.customer.email) }}</label>
+                        <div class="controls">
+                            {{form_widget(form.customer.email) }}
+                          <label class="radio inline">{{form_label(form.customer.nationality) }}</label>
+                       
+                          {{form_widget(form.customer.nationality) }}
+                         
+                          <label class="radio inline">{{form_label(form.customer.gender) }}</label>
+                          {{form_widget(form.customer.gender) }}
+                          {# form.vars.value.customer.gender #}
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.customer.address) }}</label>
+                        <div class="controls">
+                            {{form_widget(form.customer.address) }}
+                        </div>
+                      </div>
+        <!--<br>//=============================<br>-->
+        <div class="control-group">
+                        <label class="control-label">{{form_label(form.sales) }}</label>
+                        <div class="controls">
+                        {{form_widget(form.sales) }}
+                          <label class="radio inline">{{form_label(form.discountPolicies) }}</label>
+                          {{form_widget(form.discountPolicies) }}   
+                          <label class="radio inline">{{form_label(form.agreementStatus) }}</label>
+                          {{form_widget(form.agreementStatus) }} 
+                        </div>
+                      </div>
+        {#form_row(form.service)#}
+        <input type="hidden" name="acme_demobundle_agreementstype[service]" id="acme_demobundle_agreementstype_service" value="3">
+      
+        Room Details
+        <br>========================================================================<br>
+        
+         <div class="control-group">
+             <label class="control-label">{{form_label(form.endDate) }}</label>
+             <div class="controls">
+                        {{form_widget(form.endDate) }}
+                        <span class="control-label-right">تاريخ الانتهاء</span>
+                          <label class="radio inline">{{form_label(form.startDate) }}</label>
+                          {{form_widget(form.startDate) }}   
+                          
+                          <label class="radio inline">{{form_label(form.rentalPeriod) }}</label>
+                          {{form_widget(form.rentalPeriod) }} 
+                        </div>
+                      </div>
+        {#form_row(form.store) #} 
+        <div class="control-group">
+            <div style="border: 0px saddlebrown solid; width: 800px; float: right">
+            <div class="controls">
+         Rooms Size
+        <select id="roomsSize">
+            <option value="0"></option>
+            {% for store in entity.stores %}
+            <option value="{{store.id}}">{{store.size}}</option>
+            {% endfor %}
+        </select>
+
+        Rooms No
+        <select id="roomsName">
+            <option value="0"></option>
+            {% for store in entity.stores %}
+            <option value="{{store.id}}">{{store.name}}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+         <table id="selectedtables" class="table table-condensed table-striped table-bordered no-margin">
+  <tbody >
+      <tr><td>Delete</td><td>Size</td><td>Room</td><td>No</td></tr>
+      {% set x=0%}
+        {% for mystore in entity.store %}
+        {% set x=x+1 %}
+      <tr><td><a href="javascript:;" class="remove_room">Delete</a><input class="span2" type="text"  value="{{mystore.id}}" name="acme_demobundle_agreementstype[store][]" id="acme_demobundle_agreementstype_store_{{x}}"></td><td>{{mystore.size}}</td><td>{{mystore.name}}</td><td>{{x}}</td></tr>
+      {% endfor %}
+  </tbody>
+</table>
+        
+         </div>
+                    <div style="float: left; margin-top: -100px; margin-left: 130px;"><ul id="storesList">
+        
+            </ul>
+                       
+                        </div>
+                    
+                     <div class="controls">
+                            <label class="control-label">{{form_label(form.totalArea) }}</label>
+                        {{form_widget(form.totalArea) }}
+                        </div>  
+                </div>
+        </div>
+        
+
+        <div class="control-group">
+                        <label class="control-label">{{form_label(form.depositValue) }}</label>
+                        <div class="controls">
+                        {{form_widget(form.depositValue) }}
+                          <label class="radio inline">{{form_label(form.rentalValue) }}</label>
+                          {{form_widget(form.rentalValue) }}   
+                        </div>
+                      </div>
+        <div class="control-group">
+                        <label class="control-label">{{form_label(form.otherFees) }}</label>
+                        <div class="controls">
+                        {{form_widget(form.otherFees) }}
+                          <label class="radio inline">{{form_label(form.insuranceValue) }}</label>
+                          {{form_widget(form.insuranceValue) }}   
+                        </div>
+                      </div>
+        <div class="control-group">
+                        <label class="control-label">{{form_label(form.offerDiscount) }}</label>
+                        <div class="controls">
+                        {{form_widget(form.offerDiscount) }}
+                          <label class="radio inline">{{form_label(form.totalValue) }}</label>
+                          {{form_widget(form.totalValue) }}   
+                        </div>
+                      </div>
+        <div class="control-group">
+                        <label class="control-label">{{form_label(form.netValue) }}</label>
+                        <div class="controls">
+                        {{form_widget(form.netValue) }}
+                          <label class="radio inline">{{form_label(form.otherDiscount) }}</label>
+                          {{form_widget(form.otherDiscount) }}   
+                        </div>
+                      </div>
+    {#{{ form_widget(form) }}#}
+    <p>
+        {% include "AcmeDemoBundle:Elements:pagingWidget.html.twig" with {'pagingWidget': pagingWidget,'redirect_url':'quotations_edit'} %}
+        {# if entity.agreementId ==NULL #}
+            <div class="wrapper_btn">
+    <div class="btn_div"><span class="fs1" aria-hidden="true" data-icon=""></span> <a href="{{ url('quotations_new', { 'customer_id': 0 }) }}">New</a></div>
+    <div class="btn_div"><span class="fs1" aria-hidden="true" data-icon=""></span> <button name="Save" type="submit" class="btn_save">Save</button></div>
+</div>
+    </p>
+</form>
+
+                      
+ </div>
+                </div>
+              </div>
+        </div>
+</div>
+
+<script type="text/javascript">
+    var updateFormUrl="{{ path('quotations_upateFormFields') }}";
+    function ckeckCuotationNo(){
+var cuotationNo=0;
+var obj={isSubmit:true, url:""}
+  
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: "{{ path('quotations_checkQuotationNo') }}", 
+  data: {quotationNo:$('#acme_demobundle_agreementstype_agreementNo').val(),},
+  type: "post",
+    //contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(data) {
+	    if(data.exist){
+        cuotationNo=data.id;
+        if(confirm("This Quotation number already exist, open it??")){
+            obj.isSubmit=false;
+            var url="{{ path('quotations_edit', { 'id': entity.id }) }}"
+            
+            var array = url.split('/');
+            var $len=array.length;
+             array[$len-2]=cuotationNo;
+             url=array.join("/");
+             window.location.href = url;
+             return obj;
+            }
+        }
+    },
+    error: function(err) {
+        alert('Error:' + err.responseText + '  Status: ' + err.status);
+    }
+});
+  return obj;
+}
+
+function ckeckCustomerNo(){
+var cuotationNo=0;
+var obj={isSubmit:true, url:""}
+
+$.ajax({
+    type: "POST",
+    async: false,
+    url: "{{ path('customers_checkCustomersNo') }}", 
+  data: {customerNo:$('#acme_demobundle_agreementstype_customer_customerNo').val(),},
+  type: "post",
+    //contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(data) {
+	    if(data.exist){
+        cuotationNo=data.id;
+        if(confirm("This Customer number already exist, open it?")){
+            obj.isSubmit=false;
+            var url="{{ path('quotations_new', { 'customer_id': '0' }) }}"
+            
+            var array = url.split('/');
+            var $len=array.length;
+             array[$len-2]=cuotationNo;
+             url=array.join("/");
+             window.location.href = url;
+             return obj;
+            }
+        }
+    },
+    error: function(err) {
+        alert('Error:' + err.responseText + '  Status: ' + err.status);
+    }
+});
+  return obj;
+
+}
+
+$(document).ready(function() {
+  $("#acme_demobundle_agreementstype_agreementNo").blur(function() {
+           // ckeckCuotationNo();
+        });
+        
+ $('#submitForm').submit(function() {
+     var $focused = $(':focus').attr("id");
+     var obj=null;
+    if($focused=='acme_demobundle_agreementstype_agreementNo'){
+        obj=ckeckCuotationNo();
+        return obj.isSubmit;
+        }else if($focused=='acme_demobundle_agreementstype_customer_customerNo'){
+        obj=ckeckCustomerNo();
+        return obj.isSubmit;
+        }
+//return obj.isSubmit;
+return true;
+});
+});
+    </script>
+    
+     <script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideDown("slow");
+   
+  });
+ 
+  $("#flip2").click(function(){
+    $("#pane2").slideDown("slow");
+  });
+  
+       $(".delete_entity").click(function(){
+        var confirmed=confirm('You Are Sure Want Delete This Row');
+                if(!confirmed){
+            return false;
+            }
+     
+        });
+        
+  
+        
+});
+</script>
+ 
+<style type="text/css"> 
+#panel,#flip
+{
+padding:5px;
+text-align:center;
+font-weight: bold;
+width: 8%;
+
+border:solid 1px #c3c3c3;
+}
+#panel
+{
+padding:50px;
+display:none;
+}
+
+
+
+#pane2,#flip2
+{
+padding:5px;
+text-align:center;
+font-weight: bold;
+width: 8%;
+
+border:solid 1px #c3c3c3;
+}
+#pane2
+{
+padding:50px;
+display:none;
+}
+</style>
+{% endblock %}

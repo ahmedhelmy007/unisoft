@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+   <!--
+<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Self Storage{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="{{ asset('bundles/template/js/bootstrap.js')}}"></script>
+    <script src="{{ asset('bundles/template/js/jquery.min.js')}}"></script>
+  
+    <!-- bootstrap css -->
+    <script type="text/javascript" src="{{ asset('bundles/template/js/ie8/html5shiv.js')}}">
+    </script>
+    <link href="{{ asset('bundles/template/icomoon/style.css')}}" rel="stylesheet">
+    <!--[if lte IE 7]>
+    <script src="css/icomoon-font/lte-ie7.js">
+    </script>
+    <![endif]-->
+     
+    
+     <link href="{{ asset('bundles/template/css/main.ltr.css') }}" media="screen" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('bundles/template/css/storage.css') }}" media="screen" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('bundles/template/css/wysiwyg/bootstrap-wysihtml5.css') }}" rel="stylesheet">
+     <link href="{{ asset('bundles/template/css/wysiwyg/wysiwyg-color.css') }}" rel="stylesheet">
+     <link href="{{ asset('bundles/template/css/charts-graphs.css') }}" rel="stylesheet">
+     <link href="{{ asset('bundles/template/css/clockface.css') }}" rel="stylesheet">
+     <link href="{{ asset('bundles/template/css/timepicker.css') }}" rel="stylesheet">
+     <link href="{{ asset('bundles/template/css/alertify.core.css') }}" rel="stylesheet">
+     <link href="{{ asset('bundles/template/css/prettyPhoto.css') }}" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <a href="#" class="logo">
+        <img src="{{ asset('bundles/template/images/icon/logo.png') }}" alt="logo" />
+      </a>
+           
+                
+       
+
+            <style>
+            .lang{
+            margin-left: 80%
+            }
+                </style>       
+        
+<span class="lang">                          
+<a  title="{%trans%}English{%endtrans%}" href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}"><img src="{{ asset('bundles/template/images/icon/en.png') }}"  /></a>
+<a  title="{%trans%}Arabic{%endtrans%}"  href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ar'})) }}"><img src="{{ asset('bundles/template/images/icon/ar.png') }}" /></a>
+</span>
+          
+        
+    
+    </header>
+          
+    <div class="container-fluid">
+      <div class="dashboard-container">
+        <div class="top-nav">
+          <ul>
+              <li>
+                  <a href="{{path('home')}}" {%if get_controller_name() =='home'%} class="selected"{%endif%}>
+                <div class="fs1" aria-hidden="true" data-icon=""></div>
+               Home
+              </a>
+            </li>
+            <li>
+              <a href="{{path('rentalperiods')}}" {%if get_controller_name() =='rentalperiods'%} class="selected"{%endif%}>
+                <div class="fs1" aria-hidden="true" data-icon=""></div>
+                rental periods
+              </a>
+            </li>
+            <li>
+              <a href="{{path('stores')}}" {%if get_controller_name() =='stores'%} class="selected"{%endif%}>
+                <div class="fs1" aria-hidden="true" data-icon=""></div>
+               store
+              </a>
+            </li>
+            <li>
+              <a href="{{path('Nationalities')}}" {%if get_controller_name() =='nationalities'%} class="selected"{%endif%}>
+                <div class="fs1" aria-hidden="true" data-icon=""></div>
+               Nationalities
+              </a>
+            </li>
+             <li>
+              <a href="{{path('customers_new')}}" {%if get_controller_name() =='customers'%} class="selected"{%endif%}>
+                <div class="fs1" aria-hidden="true" data-icon=""></div>
+               customers
+              </a>
+            </li>
+               {#<li>
+              <a href="{{path('SalesPerson')}}" {%if get_controller_name() =='salesperson'%} class="selected"{%endif%}>
+                <div class="fs1" aria-hidden="true" data-icon=""></div>
+               sales Person
+              </a>
+            </li>#}
+                            
+            </ul>
+          <div class="clearfix"></div>
+        </div>
+              
+            
+        <div class="sub-nav"></div>
+        <div class="dashboard-wrapper">
+          {% block content %}{% endblock %}  
+         
+            </div>
+          </div>
+          
+        </div>
+      
+     
+    <footer>
+      <p>
+          
+     Unisoft Company 2013
+      </p>
+    </footer>
+   
+    <script src="{{ asset('bundles/template/js/wysiwyg/wysihtml5-0.3.0.js')}}"></script>   
+    <script src="{{ asset('bundles/template/js/jquery.scrollUp.js')}}"></script>
+    <script src="{{ asset('bundles/template/js/wysiwyg/bootstrap-wysihtml5.js')}}"></script>
+    <script src="{{ asset('bundles/template/js/bootstrap-colorpicker.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/template/js/date-picker/date.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/template/js/date-picker/daterangepicker.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/template/js/clockface.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/template/js/bootstrap-timepicker.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/template/js/jquery.bootstrap.wizard.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/template/js/alertify.min.js')}}"></script>
+    <script src="{{ asset('bundles/template/js/jquery.prettyPhoto.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/template/js/add_agreement_store.js')}}"></script> 
+   
+   <!-- lightbox script -->
+   <script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+				$("area[rel^='prettyPhoto']").prettyPhoto();
+				
+				$(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'light_square', social_tools: false,slideshow:3000, autoplay_slideshow: false});
+				$(".gallery:gt(0) a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'fast', social_tools: false,slideshow:10000, hideflash: true});
+		
+				$("#custom_content a[rel^='prettyPhoto']:first").prettyPhoto({
+					custom_markup: '<div id="map_canvas" style="width:260px; height:265px"></div>',
+					changepicturecallback: function(){ initialize(); }
+				});
+
+				$("#custom_content a[rel^='prettyPhoto']:last").prettyPhoto({
+					custom_markup: '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div><div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
+					changepicturecallback: function(){ _bsap.exec(); }
+				});
+			});
+			</script>
+                        
+    <script type="text/javascript">
+      //ScrollUp
+      $(function () {
+        $.scrollUp({
+          scrollName: 'scrollUp', // Element ID
+          topDistance: '300', // Distance from top before showing element (px)
+          topSpeed: 300, // Speed back to top (ms)
+          animation: 'fade', // Fade, slide, none
+          animationInSpeed: 400, // Animation in speed (ms)
+          animationOutSpeed: 400, // Animation out speed (ms)
+          scrollText: 'Scroll to top', // Text for element
+          activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+        });
+      });
+
+      //Tooltip
+      $('a').tooltip('hide');
+
+      //Popover
+      $('.popover-pop').popover('hide');
+
+      //Collapse
+      $('#myCollapsible').collapse({
+        toggle: false
+      })
+
+      //Tabs
+      $('.myTabBeauty a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+      })
+
+      //Dropdown
+      $('.dropdown-toggle').dropdown();
+
+      //wysihtml5
+      $('#wysiwyg').wysihtml5();
+
+      //Color picker
+      $('.colorpicker').colorpicker();
+
+      //Bootstrap Timepicker
+      $('#timepicker1').timepicker();
+
+      
+
+
+
+
+      //Date picker
+      $('.date_picker').daterangepicker({
+        opens: 'left'
+      });
+
+      //Date Picker
+
+      $('.report_range').daterangepicker({
+        ranges: {
+          'Today': ['today', 'today'],
+          'Yesterday': ['yesterday', 'yesterday'],
+          'Last 7 Days': [Date.today().add({
+            days: -6
+          }), 'today'],
+          'Last 30 Days': [Date.today().add({
+            days: -29
+          }), 'today'],
+          'This Month': [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()],
+          'Last Month': [Date.today().moveToFirstDayOfMonth().add({
+            months: -1
+          }), Date.today().moveToFirstDayOfMonth().add({
+            days: -1
+          })]
+        },
+        opens: 'right',
+        format: 'MM/dd/yyyy',
+        separator: ' to ',
+        startDate: Date.today().add({
+          days: -29
+        }),
+        endDate: Date.today(),
+        minDate: '01/01/2012',
+        maxDate: '12/31/2013',
+        locale: {
+          applyLabel: 'Submit',
+          fromLabel: 'From',
+          toLabel: 'To',
+          customRangeLabel: 'Custom Range',
+          daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+          monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          firstDay: 1
+        },
+        showWeekNumbers: true,
+        buttonClasses: ['btn-danger']
+      },
+
+      function (start, end) {
+        $('.report_range span').html(start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
+      });
+
+      //Set the initial state of the picker label
+      $('.report_range span').html(Date.today().add({
+        days: -29
+      }).toString('MMMM d, yyyy') + ' - ' + Date.today().toString('MMMM d, yyyy'));
+
+
+      //Wizard Progressbar
+
+      $('#inverse').bootstrapWizard({
+        'tabClass': 'nav',
+        'debug': false,
+        onShow: function (tab, navigation, index) {
+          console.log('onShow');
+        },
+        onNext: function (tab, navigation, index) {
+          console.log('onNext');
+          if (index == 2) {
+            // Make sure we entered the name
+            if (!$('#name').val()) {
+              alert('You must enter your name');
+              $('#name').focus();
+              return false;
+            }
+          }
+
+          // Set the name for the next tab
+          $('#inverse-tab3').html('Hello, ' + $('#name').val());
+
+        },
+        onPrevious: function (tab, navigation, index) {
+          console.log('onPrevious');
+        },
+        onLast: function (tab, navigation, index) {
+          console.log('onLast');
+        },
+        onTabClick: function (tab, navigation, index) {
+          console.log('onTabClick');
+          alert('on tab click disabled');
+          return false;
+        },
+        onTabShow: function (tab, navigation, index) {
+          console.log('onTabShow');
+          var $total = navigation.find('li').length;
+          var $current = index + 1;
+          var $percent = ($current / $total) * 100;
+          $('#inverse').find('.bar').css({
+            width: $percent + '%'
+          });
+        }
+      });
+
+
+      //Wizard Progressbar tabs left
+
+      $('#tabsleft').bootstrapWizard({
+        'tabClass': 'nav nav-tabs',
+        'debug': false,
+        onShow: function (tab, navigation, index) {
+          console.log('onShow');
+        },
+        onNext: function (tab, navigation, index) {
+          console.log('onNext');
+        },
+        onPrevious: function (tab, navigation, index) {
+          console.log('onPrevious');
+        },
+        onLast: function (tab, navigation, index) {
+          console.log('onLast');
+        },
+        onTabClick: function (tab, navigation, index) {
+          console.log('onTabClick');
+
+        },
+        onTabShow: function (tab, navigation, index) {
+          console.log('onTabShow');
+          var $total = navigation.find('li').length;
+          var $current = index + 1;
+          var $percent = ($current / $total) * 100;
+          $('#tabsleft').find('.bar').css({
+            width: $percent + '%'
+          });
+
+          // If it's the last tab then hide the last button and show the finish instead
+          if ($current >= $total) {
+            $('#tabsleft').find('.pager .next').hide();
+            $('#tabsleft').find('.pager .finish').show();
+            $('#tabsleft').find('.pager .finish').removeClass('disabled');
+          } else {
+            $('#tabsleft').find('.pager .next').show();
+            $('#tabsleft').find('.pager .finish').hide();
+          }
+
+        }
+      });
+
+
+      $('#tabsleft .finish').click(function () {
+        alert('Finished!, Starting over!');
+        $('#tabsleft').find("a[href*='tabsleft-tab1']").trigger('click');
+      });
+    </script>  
+    
+    
+     <script type="text/javascript">
+      //Tooltip
+      $('a').tooltip('hide');
+
+      //Popover
+      $('.popover-pop').popover('hide');
+
+
+      //Collapse
+      $('#myCollapsible').collapse({
+        toggle: false
+      })
+
+      //Tabs
+      $('.myTabBeauty a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+      })
+
+
+      //Dropdown
+      $('.dropdown-toggle').dropdown();
+
+
+      //Alertify JS
+      $ = function (id) {
+        return document.getElementById(id);
+      },
+      reset = function () {
+        $("toggleCSS").href = "{{ asset('bundles/template/css/alertify.core.css') }}";
+        alertify.set({
+          labels: {
+            ok: "OK",
+            cancel: "Cancel"
+          },
+          delay: 5000,
+          buttonReverse: false,
+          buttonFocus: "ok"
+        });
+      };
+
+      // Standard Dialogs
+      $("alert").onclick = function () {
+        reset();
+        alertify.alert("This is an alert Dialog");
+        return false;
+      };
+
+      $("confirm").onclick = function () {
+        reset();
+        alertify.confirm("This is a confirm dialog", function (e) {
+          if (e) {
+            alertify.success("You've clicked OK");
+          } else {
+            alertify.error("You've clicked Cancel");
+          }
+        });
+        return false;
+      };
+
+      $("prompt").onclick = function () {
+        reset();
+        alertify.prompt("This is a prompt dialog", function (e, str) {
+          if (e) {
+            alertify.success("You've clicked OK and typed: " + str);
+          } else {
+            alertify.error("You've clicked Cancel");
+          }
+        }, "Default Value");
+        return false;
+      };
+
+      // Standard Dialogs
+      $("notification").onclick = function () {
+        reset();
+        alertify.log("Standard log message");
+        return false;
+      };
+
+      $("success").onclick = function () {
+        reset();
+        alertify.success("Success log message");
+        return false;
+      };
+
+      $("error").onclick = function () {
+        reset();
+        alertify.error("Error log message");
+        return false;
+      };
+
+      // Custom Properties
+      $("delay").onclick = function () {
+        reset();
+        alertify.set({
+          delay: 10000
+        });
+        alertify.log("Hiding in 10 seconds");
+        return false;
+      };
+
+      $("forever").onclick = function () {
+        reset();
+        alertify.log("Will stay until clicked", "", 0);
+        return false;
+      };
+
+      //Alertify JS end
+    </script>
+  </body>
+</html>

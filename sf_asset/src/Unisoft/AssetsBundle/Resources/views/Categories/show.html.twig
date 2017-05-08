@@ -1,0 +1,43 @@
+<h1>Categories</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Categoryno</th>
+            <td>{{ entity.categoryNo }}</td>
+        </tr>
+        <tr>
+            <th>Englishmame</th>
+            <td>{{ entity.englishMame }}</td>
+        </tr>
+        <tr>
+            <th>Arabicname</th>
+            <td>{{ entity.arabicName }}</td>
+        </tr>
+    </tbody>
+</table>
+{% for child in entity.childs %}
+{{child.id}} ==>  {{child.getEnglishMame}}<br>
+{% endfor %}
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('Categories') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('Categories_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('Categories_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

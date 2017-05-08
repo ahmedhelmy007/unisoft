@@ -1,0 +1,26 @@
+parameters:
+
+    database_driver:   oci8
+    database_host:     192.168.1.101
+    database_port:     1521
+    database_name:     SF
+    database_user:     SELF
+    database_password: SELF
+
+#    database_driver: pdo_mysql
+#    database_host: 127.0.0.1
+#    database_port: null
+#    database_name: self_storage
+#    database_user: root
+#    database_password: null
+#    database_path: null
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+    secret:            180ea19aada66d3d8f3e083e26c9bbd55f350ff1
+
+

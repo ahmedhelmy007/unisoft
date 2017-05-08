@@ -1,0 +1,101 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}{% trans %}Administration creation{%endtrans%}{% endblock %}
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="row-fluid">
+  <div class="span12">
+
+    <div class="box">
+      <div class="tab-header">{% trans %}Administration creation{%endtrans%}<span class="pull-right"></span>
+      </div>
+     <form class="fill-up" action="{{ path('administrations_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+        {{ form_widget(form._token) }}
+              
+          <div class="row-fluid">
+          <div class="span6">
+            <div class="padded">
+             
+             <div class="input">
+             {{form_widget(form.administrationNo) }}
+            <span class="input-error" data-title="{% trans %}please write a Administration Number{%endtrans%}" data-original-title="">
+                <i class="icon-info-sign"></i>&nbsp;&nbsp;&nbsp;
+           </span> 
+         <div class="gallery clearfix custo"> 
+         <a class="assets_search" title="{% trans %}Search For Administration Number{%endtrans%}" href="{{url('SfServices_search', {'entity':'Administrations','keyword': 'param1','filed':'param2' }) }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_administrationstype_administrationNo" fieldName="administrationNo"><img  src="{{ asset('bundles/template/images/ss.png') }}" width="40" height="40" /></a>
+                  </div>
+             </div> 
+              
+            <div class="input">             
+            {{form_widget(form.arName) }}
+            <span class="input-error" data-title="{% trans %}please write a Arabic Name{%endtrans%}" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>       
+            </div>
+            <div class="input">
+             {{form_widget(form.enName) }}
+            <span class="input-error" data-title="{% trans %}please write a English Name{%endtrans%}" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+
+          </div>
+          </div>   
+    <br>                            
+</div>
+ <div class="form-actions">
+  <button type="submit" class="button blue" >{% trans %}Create{%endtrans%}</button>
+  </form>   
+ <a href="{{ path('administrations') }}" class="button">{% trans %}Back to the list{% endtrans %}</a>
+ 
+      </form> 
+              
+            
+        </div>         
+       </div>
+              
+       </div>
+      
+      </div>
+        </div>
+<script>
+    var arabic_changed=0; 
+    var english_changed=0;
+    
+    $("#unisoft_assetsbundle_administrationstype_arName").keyup(function () {
+       arabic_changed=1;
+   //    alert('arabic_changed:' +arabic_changed + ' and english_changed:' + english_changed);
+       if(english_changed == 0){
+           var value = $(this).val();
+          document.getElementById("unisoft_assetsbundle_administrationstype_enName").value =(value );
+       }
+    });
+
+  $("#unisoft_assetsbundle_administrationstype_enName").keyup(function () {
+    english_changed=1;
+       if(arabic_changed == 0){
+    var value = $(this).val();
+         document.getElementById("unisoft_assetsbundle_administrationstype_arName").value =(value );
+  }
+    });
+    
+    
+    
+    
+</script>
+{% endblock %}

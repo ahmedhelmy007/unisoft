@@ -1,0 +1,79 @@
+<link href="{{ asset('bundles/template/css/application.css') }}" media="screen" rel="stylesheet" type="text/css" />
+
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="box">
+      <div class="tab-header">{%trans%}Vendor list{%endtrans%}
+          <a href="#" onclick="window.print()" class="button blue">{%trans%}print{%endtrans%}</a>
+          <span class="pull-right"></span>
+      </div>
+      <form  class="fill-up"  action="{{ path('Vendors_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+          <table  width="60%" class="table table-striped table-bordered box ">
+              <tr>
+                  <td class="draw size">{{form_label(edit_form.vendorNo) }}</td>
+                  <td>{{entity.vendorNo }}</td>
+              </tr>
+              <tr>
+                  <td class="draw">{{form_label(edit_form.arName) }}</td>
+                  <td>{{entity.arName}}</td>
+              </tr>
+              <tr>
+                  <td class="draw">{{form_label(edit_form.enName) }}</td>
+                  <td>{{entity.enName}}</td>
+              </tr>
+               <tr>
+                  <td class="draw">{{form_label(edit_form.eMail) }}</td>
+                  <td>{{entity.eMail}}</td>
+              </tr>
+               <tr>
+                  <td class="draw">{{form_label(edit_form.codeFax) }}</td>
+                  <td>{{entity.codeFax}}</td>
+              </tr>
+              <tr>
+                  <td class="draw">{{form_label(edit_form.faxNo) }}</td>
+                  <td>{{entity.faxNo}}</td>
+              </tr>
+              <tr>
+                  <td class="draw">{{form_label(edit_form.accountNo) }}</td>
+                  <td>{{entity.accountNo}}</td>
+              </tr>
+               <tr>
+                  <td class="draw">{{form_label(edit_form.country) }}</td>
+                  <td>{{entity.country}}</td>
+              </tr>
+              <tr>
+                  <td class="draw">{{form_label(edit_form.codePhone) }}</td>
+                  <td>{{entity.codePhone}}</td>
+              </tr>
+               <tr>
+                  <td class="draw">{{form_label(edit_form.phoneNo) }}</td>
+                  <td>{{entity.phoneNo}}</td>
+              </tr>
+               <tr>
+                  <td class="draw">{{form_label(edit_form.accountManager) }}</td>
+                  <td>{{entity.accountManager}}</td>
+              </tr>
+               <tr>
+                  <td class="draw">{{form_label(edit_form.importingFields) }}</td>
+                  <td>{{entity.importingFields}}</td>
+              </tr>
+              <tr>
+                  <td class="draw">{{form_label(edit_form.authorized) }}</td>
+                  <td>{{entity.authorized}}</td>
+              </tr>
+              <tr>
+                  <td class="draw">{{form_label(edit_form.website) }}</td>
+                  <td>{{entity.website}}</td>
+              </tr>
+              
+              
+              
+          
+          </table>
+
+  </form> 
+   </div></div></div>  
+   
+
+     

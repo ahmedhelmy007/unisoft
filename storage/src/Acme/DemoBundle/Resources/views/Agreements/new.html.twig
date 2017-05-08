@@ -1,0 +1,76 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Agreements{% endblock %}
+{% block content %} 
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice') %}
+            <div  class="alert alert-block alert-success fade in">
+               <h4 class="alert-heading">
+                        Success!
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+               </h4>
+                
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+
+
+<div class="left-sidebar" style="margin-right: 0px;">
+    <div class="row-fluid">
+              <div class="span12">
+                <div class="widget">
+                  <div class="widget-header">
+                    <div class="title " data-icon="">
+                      ِAgreements
+                    </div>
+                  </div>
+                 
+                        
+                  <div class="widget-body">
+<form action="{{ path('agreements_create', { 'customer_id': customer_id }) }}" method="post" {{ form_enctype(form) }}>
+    {{form_errors(form) }}
+ {{ form_widget(form._token) }}
+        {{form_row(form.agreementType) }}
+        {{form_row(form.transactionType) }}
+        {{form_row(form.agreementNo) }}
+        {{form_row(form.quotaionNo) }}
+        {{form_row(form.agreementDate) }}
+        {{form_row(form.agreementDate) }}
+        <br>//=============================<br>
+         {{form_row(form.customer) }}
+        <input type="hidden" name="acme_demobundle_agreementstype[customer]" id="acme_demobundle_agreementstype_customer" value="{{customer_id}}">
+        <br>//=============================<br>
+        
+        {{form_row(form.sales) }}
+        {{form_row(form.discountPolicies) }}
+        {{entity.agreementStatus}}
+        {#form_row(form.service)#}
+        <input type="hidden" name="acme_demobundle_agreementstype[service]" id="acme_demobundle_agreementstype_service" value="3">
+        
+    {#{{ form_widget(form) }}#}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('agreements') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+</div>
+                </div>
+              </div>
+        </div>
+</div>
+{% endblock %}

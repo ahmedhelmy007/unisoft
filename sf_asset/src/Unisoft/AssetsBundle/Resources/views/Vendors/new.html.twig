@@ -1,0 +1,184 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}Assets - Vendors list{% endblock %}
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="row-fluid">
+  <div class="span12">
+
+    <div class="box">
+      <div class="tab-header">{% trans %}Vendor Creation{% endtrans %}<span class="pull-right"></span>
+      </div>
+     <form class="fill-up" action="{{ path('Vendors_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+        {{ form_widget(form._token) }}
+              
+          <div class="row-fluid">
+          <div class="span6">
+            <div class="padded">
+             
+             <div class="input">
+             {{form_widget(form.vendorNo) }}
+            <span class="input-error" data-title="please write a Vendor Number" data-original-title="">
+                <i class="icon-info-sign"></i>&nbsp;&nbsp;&nbsp;
+           </span> 
+         <div class="gallery clearfix custo"> 
+         <a class="assets_search" title="Search For Vendor Number" href="{{ url('SfServices_search', {'entity':'Vendors','keyword': 'param1','filed':'param2' })  }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_vendorstype_vendorNo" fieldName="vendorNo"><img  src="{{ asset('bundles/template/images/ss.png') }}" width="40" height="40" /></a>
+
+                  </div>
+             </div> 
+              
+            <div class="input">             
+            {{form_widget(form.arName) }}
+            <span class="input-error" data-title="please write a Arabic Name" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>       
+            </div>
+            <div class="input">
+             {{form_widget(form.enName) }}
+            <span class="input-error" data-title="please write a English Name" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+            <div class="input">
+            {{form_widget(form.eMail) }}
+            <span class="input-error" data-title="please write a E-mail Address" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+           
+            <div class="input">
+            {{form_widget(form.codeFax) }}
+            <span class="input-error" data-title="please write a Fax Code" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+             <div class="input">
+             {{form_widget(form.faxNo) }}
+            <span class="input-error" data-title="please write a Fax Number" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>        
+            </div>        
+             <div class="input">        
+             {{form_widget(form.accountNo) }}
+              <span class="input-error" data-title="please write a Account Number" data-original-title="">
+            <i class="icon-info-sign"></i>&nbsp;&nbsp;&nbsp;
+            </span> 
+           <div class="gallery clearfix custo"> 
+         <a class="assets_search" title="Search For Vendor Number" href="{{ url('SfServices_search', {'entity':'Vendors','keyword': 'param1','filed':'param2' })  }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto" sourceId="unisoft_assetsbundle_vendorstype_accountNo" fieldName="accountNo"><img  src="{{ asset('bundles/template/images/ss.png') }}" width="40" height="40" /></a>
+                  </div>       
+             </div>  
+     
+          </div>
+          </div>
+
+          <div class="span6">
+            <div class="padded" style="padding-bottom: 0">
+             <div class="input">   
+             {{form_widget(form.country) }}
+            <span class="input-error" data-title="please write a Country" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>
+             <div class="input">             
+            {{form_widget(form.codePhone) }}
+             <span class="input-error" data-title="please write a Phone Code" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>  
+             </div>
+             <div class="input">
+             {{form_widget(form.phoneNo) }}
+            <span class="input-error" data-title="please write a Phone Number" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>         
+             </div>       
+                       
+             <div class="input">
+               {{form_widget(form.accountManager) }}
+            <span class="input-error" data-title="please write a Account Manager" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+             </div>
+             <div class="input">
+             {{form_widget(form.importingFields) }}
+              <span class="input-error" data-title="please write a Importing Fields" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>          
+            </div>
+            <div class="input">
+             {{form_widget(form.authorized) }}
+              <span class="input-error" data-title="please write a Authorized" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>          
+            </div>
+             <div class="input">
+             {{form_widget(form.website) }} 
+             <span class="input-error" data-title="please write a Web-Site" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>       
+            </div> 
+                   
+                    
+    <br>                            
+
+<script>
+    var arabic_changed=0; 
+    var english_changed=0;
+    
+    $("#unisoft_assetsbundle_vendorstype_arName").keyup(function () {
+       arabic_changed=1;
+   //    alert('arabic_changed:' +arabic_changed + ' and english_changed:' + english_changed);
+       if(english_changed == 0){
+           var value = $(this).val();
+          document.getElementById("unisoft_assetsbundle_vendorstype_enName").value =(value );
+       }
+    });
+
+  $("#unisoft_assetsbundle_vendorstype_enName").keyup(function () {
+    english_changed=1;
+       if(arabic_changed == 0){
+    var value = $(this).val();
+         document.getElementById("unisoft_assetsbundle_vendorstype_arName").value =(value );
+  }
+    });
+    
+    
+    
+    
+</script>
+    
+    
+ </div></div></div>
+ <div class="form-actions">
+     
+  <button type="submit" class="button blue" >{% trans %}Create{%endtrans%}</button>
+  </form>   
+ <a href="{{ path('Vendors') }}" class="button">{% trans %}Back to the list{% endtrans %}</a>
+ 
+      </form> 
+              
+            
+        </div>         
+       </div>
+              
+       </div>
+      
+      </div>
+        </div>
+
+ 
+{% endblock %}

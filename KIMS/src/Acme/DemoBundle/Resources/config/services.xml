@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="twig.extension.acme.demo" class="Acme\DemoBundle\Twig\Extension\DemoExtension" public="false">
+            <tag name="twig.extension" />
+            <argument type="service" id="twig.loader" />
+            <argument type="service" id="acme.demo.kims_service" />
+        </service>
+
+<!--<tag name="kernel.event_listener" event="kernel.request" method="onKernelController" />-->
+<!--<tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />-->
+        <service id="acme.demo.listener" class="Acme\DemoBundle\EventListener\ControllerListener">
+            <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
+            <argument type="service" id="twig.extension.acme.demo" />
+        </service>
+        
+        <service id="acme.demo.kims_service" class="Acme\DemoBundle\EventListener\KimsService">
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="service_container" />
+        </service>
+        
+        <service id="acme.twig.acme_extension" class="Acme\DemoBundle\Twig\UnisoftExtension">
+            <tag name="twig.extension" />
+            <argument type="service" id="service_container" />
+        </service>
+        
+    </services>
+</container>

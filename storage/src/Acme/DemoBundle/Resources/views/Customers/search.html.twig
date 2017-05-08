@@ -1,0 +1,98 @@
+<script src="{{ asset('bundles/template/js/bootstrap.js')}}"></script>
+    <script src="{{ asset('bundles/template/js/jquery.min.js')}}"></script>
+    <!-- bootstrap css -->
+    <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+    </script>
+    <link href="{{ asset('bundles/template/icomoon/style.css')}}" rel="stylesheet">
+    <!--[if lte IE 7]>
+    <script src="css/icomoon-font/lte-ie7.js">
+    </script>
+    <![endif]-->
+     <link href="{{ asset('bundles/template/css/main.ltr.css') }}" media="screen" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('bundles/template/css/wysiwyg/bootstrap-wysihtml5.css') }}" rel="stylesheet">
+{% block content %}
+<div class="dashboard-wrapper">
+     <div class="left-sidebar2">
+<div class="row-fluid">
+    <!-- first -->
+      <div class="widget">
+      <div class="widget-header">
+      <div class="title " data-icon="">
+       Customers Search
+       </div></div>
+      <div class="widget-body">
+<form action="{{ path('customers_search') }}" method="post" {{ form_enctype(form) }} novalidate="">
+    
+    <div class="control-group">
+                        
+                        <div class="controls">
+                          {{form_widget(form.customerNo) }}                     
+                          
+                          {{form_widget(form.civilId) }}                     
+                          
+                          {{form_widget(form.mobile) }}               
+                          
+                          {{form_widget(form.phone) }}                  
+                          
+                          {{form_widget(form.nationality) }}
+                        </div>
+                      </div>
+    
+    <div class="control-group">
+                       
+                        <div class="controls">
+                          {{form_widget(form.enName) }} 
+                          
+                          {{form_widget(form.arName) }}   
+                          
+                          {{form_widget(form.contactPerson) }}   
+                        </div>
+                      </div>
+    
+{{ form_widget(form) }}   
+        <button type="submit" class="button large" style="height: 30px; color: black">Search</button>
+</form>
+<table class="table table-condensed table-striped table-bordered no-margin">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Customer No</th>
+            <th>Customer Name E</th>
+            <th>Customer Name A</th>
+            <th>Civil ID</th>
+            <th>Mobile</th>
+            <th>Phone</th>
+            <th>Fax</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.id }}</td>
+            <td>{{ entity.customerNo }}</td>
+            <td>{{ entity.enName }}</td>
+            <td>{{ entity.arName }}</td>
+            <td>{{ entity.civilId }}</td>
+            <td>{{ entity.mobile }}</td>
+            <td>{{ entity.phone }}</td>
+            <td>{{ entity.fax }}</td>
+            <td>{{ entity.email }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('customers_edit', { 'id': entity.id }) }}" target="_top">show</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+              </div>
+                </div>
+              </div>
+            </div>
+         </div>
+{% endblock %}

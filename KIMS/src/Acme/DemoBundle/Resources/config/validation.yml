@@ -1,0 +1,29 @@
+Acme\DemoBundle\Entity\User:
+    properties:           
+        fullName:               
+               - NotBlank: 
+                      message: "يجب عدم ترك الاسم فارغا"
+        username:               
+               - NotBlank: 
+                      message: "يجب عدم ترك اسم الدخول فارغا"
+        password:               
+               - NotBlank: 
+                      message: "يجب عدم ترك كلمة المرور فارغة"
+                      
+Acme\DemoBundle\Entity\Doors:
+    properties:           
+        
+        
+        price:               
+             - Regex:
+                   pattern: "/^[0-9]+$/"
+                   match:   true
+                   message: "لا يجب ادخال احرف ارقام فقط"
+        balance:               
+             - Regex:
+                   pattern: "/^[0-9]+$/"
+                   match:   true
+                   message: "لا يجب ادخال احرف ارقام فقط"           
+
+
+      

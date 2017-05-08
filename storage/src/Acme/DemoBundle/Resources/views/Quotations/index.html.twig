@@ -1,0 +1,75 @@
+<h1>Agreements list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Agreementno</th>
+            <th>Agreementtype</th>
+            <th>Transactiontype</th>
+            <th>Agreementid</th>
+            <th>Agreementdate</th>
+            <th>Discountpolicies</th>
+            <th>Startdate</th>
+            <th>Enddate</th>
+            <th>Evacuationdate</th>
+            <th>Totalarea</th>
+            <th>Rentalvalue</th>
+            <th>Insurancevalue</th>
+            <th>Depositvalue</th>
+            <th>Otherfees</th>
+            <th>Totalvalue</th>
+            <th>Offerdiscount</th>
+            <th>Otherdiscount</th>
+            <th>Netvalue</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('agreements_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.agreementNo }}</td>
+            <td>{{ entity.agreementType }}</td>
+            <td>{{ entity.transactionType }}</td>
+            <td>{{ entity.agreementId }}</td>
+            <td>{% if entity.agreementDate %}{{ entity.agreementDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.discountPolicies }}</td>
+            <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.evacuationDate %}{{ entity.evacuationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.totalArea }}</td>
+            <td>{{ entity.rentalValue }}</td>
+            <td>{{ entity.insuranceValue }}</td>
+            <td>{{ entity.depositValue }}</td>
+            <td>{{ entity.otherFees }}</td>
+            <td>{{ entity.totalValue }}</td>
+            <td>{{ entity.offerDiscount }}</td>
+            <td>{{ entity.otherDiscount }}</td>
+            <td>{{ entity.netValue }}</td>
+            <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.modified %}{{ entity.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('agreements_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('agreements_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('agreements_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

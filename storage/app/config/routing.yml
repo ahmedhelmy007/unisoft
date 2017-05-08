@@ -1,0 +1,6 @@
+_welcome:
+    pattern:  /
+    defaults: { _controller: AcmeDemoBundle:Home:index }
+    
+Acme_demo:
+    resource: "@AcmeDemoBundle/Resources/config/routing.yml"

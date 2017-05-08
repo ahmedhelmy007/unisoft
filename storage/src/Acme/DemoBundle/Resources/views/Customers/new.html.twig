@@ -1,0 +1,169 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+  {% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice') %}
+            <div  class="alert alert-block alert-success fade in">
+               <h4 class="alert-heading">
+                        Success!
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+               </h4>
+                
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %}     
+<div class="left-sidebar" style="margin-right: 0px;">
+    <div class="row-fluid">
+            {#{ form_widget(form._token) }#}
+              <div class="span12">
+                <div class="widget">
+                  <div class="widget-header">
+                    <div class="title">
+                      Customers
+                    </div>
+                  </div>           
+                        
+                  <div class="widget-body">
+                   <form class="form-horizontal no-margin" id="form-content" action="{{ path('customers_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+{% include "AcmeDemoBundle:Elements:customers_btn.html.twig" %}<br>
+
+{{ form_widget(form._token) }}
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.customerNo) }}</label>
+                        <div class="controls controls-row">{{form_widget(form.customerNo) }}
+                        <ul class="gallery clearfix custo">
+      <li><a class="assets_search" title="Search For Customer" href="{{ url('customers_search') }}?iframe=true&amp;width=100%&height=100%" rel="prettyPhoto">
+          <img  src="{{ asset('bundles/template/images/ss.png') }}" width="40" height="40" />
+          </a></li>
+  </ul>
+                        </div>
+                      </div>
+                          
+                          
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.enName) }}</label>
+                        <div class="controls">
+                          {{form_widget(form.enName) }}
+                          <label class="radio inline">{{form_label(form.arName) }}</label>
+                          {{form_widget(form.arName) }}                          
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.civilId) }}</label>
+                        <div class="controls">
+                          {{form_widget(form.civilId) }}
+                          <label class="radio inline">{{form_label(form.mobile) }}</label>
+                          {{form_widget(form.mobile) }}
+                          <label class="radio inline">{{form_label(form.phone) }}</label>
+                          {{form_widget(form.phone) }}
+                          <label class="radio inline">{{form_label(form.fax) }}</label>
+                          {{form_widget(form.fax) }}
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.email) }}</label>
+                        <div class="controls">
+                            {{form_widget(form.email) }}
+                          <label class="radio inline">{{form_label(form.nationality) }}</label>
+                          {{form_widget(form.nationality) }}
+                          <label class="radio inline">{{form_label(form.gender) }}</label>
+                          {{form_widget(form.gender) }}
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.contactPerson) }}</label>
+                        <div class="controls">
+                            {{form_widget(form.contactPerson) }}
+                          <label class="radio inline">{{form_label(form.contactMobile) }}</label>
+                          {{form_widget(form.contactMobile) }}
+                          <label class="radio inline">{{form_label(form.contactPhone) }}</label>
+                          {{form_widget(form.contactPhone) }}
+                        </div>
+                      </div>
+                      
+                      <div class="control-group">
+                        <label class="control-label">{{form_label(form.address) }}</label>
+                        <div class="controls">
+                            {{form_widget(form.address) }}
+                        </div>
+                      </div>
+                          
+                       <div class="control-group">
+                        <label class="control-label">{{form_label(form.services) }}</label>
+                        <div class="controls">
+                            {{form_widget(form.services) }}
+                        </div>
+                      </div>   
+                          
+                          
+                          
+                           <fieldset>
+    <legend>Details address:</legend>
+                          <div class="control-group">
+                              <label class="control-label">{{form_label(form.region) }}</label>
+                        <div class="controls">
+                          {{form_widget(form.region) }}
+                          
+                         <label class="radio inline">{{form_label(form.part) }}</label>
+                          {{form_widget(form.part) }}   
+                         
+                         <label class="radio inline">{{form_label(form.gada) }}</label>
+                          {{form_widget(form.gada) }} 
+                        </div>
+                      </div>
+                           
+                      <div class="control-group">
+                              <label class="control-label">{{form_label(form.street) }}</label>
+                        <div class="controls">
+                          {{form_widget(form.street) }}
+                         <label class="radio inline">{{form_label(form.house) }}</label>
+                          {{form_widget(form.house) }}   
+                        </div>
+                      </div>
+                          
+                     <div class="control-group">
+                              <label class="control-label">{{form_label(form.floor) }}</label>
+                        <div class="controls">
+                          {{form_widget(form.floor) }}
+                         <label class="radio inline">{{form_label(form.flat) }}</label>
+                          {{form_widget(form.flat) }}   
+                        </div>
+                      </div>   
+                          
+                     <div class="control-group">
+                              <label class="control-label">{{form_label(form.notes) }}</label>
+                        <div class="controls">
+                          {{form_widget(form.notes) }}
+                        </div>
+                      </div>
+                           </fieldset>
+                          {% include "AcmeDemoBundle:Elements:customers_btn.html.twig" %}<br>
+
+                      </form>
+                  </div>
+                </div>
+              </div>
+        </div>
+</div>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('customers') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

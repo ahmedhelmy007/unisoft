@@ -1,0 +1,275 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+{% block title %}أضافة مستخدم{% endblock %}
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('notice') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="row-fluid">
+  <div class="span12">
+
+    <div class="box">
+      <div class="tab-header">  أضافة مستخدم <span class="pull-right"></span>
+      </div>
+     <form id="form_create" class="fill-up" action="{{ path('User_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+        {{ form_widget(form._token) }}
+              
+          <div class="row-fluid">
+          <div class="span6">
+            <div class="padded">
+             
+                 <div class="input">
+                     <div class="validation_error">{{form_errors(form.fullName)}}</div>
+             {{form_widget(form.fullName) }}
+            <span class="input-error" data-title="ادخل الاسم بالكامل" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+             <div class="input">
+                 <div class="validation_error">{{form_errors(form.username)}}</div>
+             {{form_widget(form.username) }}
+            <span class="input-error" data-title="اسم الدخول" data-original-title="">
+                <i class="icon-info-sign"></i>
+           </span> 
+            </div> 
+           <div class="input">  
+                <div style="color: red">{{ form_errors(form.password) }}</div>
+            {{form_widget(form.password) }}
+            </div>
+           
+                <div align="center">
+                    <button id="Add" type="submit" class="button blue" >أضافة</button>
+    <button type="reset" class="button blue" >ألغاء</button>
+<br><br>
+</div>
+     
+                 <!-- List -->
+              <table class="table table-striped table-bordered box">
+                <thead>
+                    <tr>
+                        <th colspan="10"><i class="icon-th-list"></i> المستخدمين</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                   
+                    <tr style="font-weight: bold">
+                        <td width="6%"><div align="center">#</div></td>
+                        <td><div align="center">اسم الدخول</div></td>
+                        <td><div align="center">ألاسم</div></td>
+                        <td><div align="center">تعديل</div></td>
+                        <td><div align="center">تغير كلمة المرور</div></td>
+                        <td><div align="center">حذف</div></td>
+                       
+                    </tr>
+                        {% set count = 0 %}
+                        {% for c_entity in entities  %}
+                        {% set count = count+1 %}
+                         <tr>
+                             <td><div align="center">{{ count}}</div></td>
+                             <td><div align="center">{{ c_entity.username }}</div></td>
+                             <td><div align="center">{{ c_entity.fullName }}</div></td>
+                             <td><div align="center"><a class="button icon-edit" href="{{ path('User_edit', { 'id': c_entity.id }) }}"> تعديل </a></div></td> 
+                             <td><div align="center"><a class="button icon-edit" href="{{ path('User_change_pass', { 'id': c_entity.id }) }}"> تعديل كلمة المرور </a></div></td> 
+                             <td> 
+                             <div align="center">
+                                 <div align="center"><a class="delete_entity button icon-trash" href="{{ path('User_delete', { 'id': c_entity.id }) }}"> حذف </a></div>
+                                         <!--<button value="{{c_entity.id}}" class="delete_entity button blue">حذف</button> -->
+                                 </div>
+                             </td>
+                         </tr>
+                     {% endfor %}
+                        </td>
+                    </tr>
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <div class="clearfix" style="padding: 0 5px;">
+                                <div class="pull-left">
+                   <i class="icon-th-list"></i>  عدد المستخدمين ( {{ count}} )                                                                    
+                                </div> 
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+                <!-- end list-->
+          </div>
+          </div>
+
+          <div class="span6">
+            <div class="padded" >
+                      
+      <table class="table checkBoxRols">
+              <thead>
+                <tr>
+                  <th style="color: red">  تصنيف انواع المستخدمين</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for role in form.roles2 %}       
+               <tr style="font-weight: bold">
+                 <td>             
+                      {{get_label_txt(form_label(role))|trans({}, "labels")}}
+               </td>
+               <td>
+                     {{form_widget(role) }}
+               </td>
+                       
+                    {% endfor %}
+                        </tr>
+                                
+              </tbody>
+            </table>    
+       
+       
+  <!-- doors -->    
+  <table class="table checkBoxGroup">
+              <thead>
+                <tr>
+                  <th style="color: red"> صلاحيات الابواب والمصروفات </th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% set x=0 %}
+               {% for aclAction in form.aclActions %}
+                {% if check_controller_name(form_label(aclAction),'doors')%}
+                {% set x=x+1 %}        
+               <tr style="font-weight: bold">
+                 <td>             
+                     {{get_label_txt(form_label(aclAction))|trans({}, "labels")}}
+               </td>
+               <td>
+                     {{form_widget(aclAction) }}
+               </td>
+                      {% endif%}   
+                    {% endfor %}
+                        </tr>
+                                
+              </tbody>
+            </table>
+   <!-- Enddoors -->              
+   
+   <!-- activities -->  
+    <table class="table checkBoxGroup">
+              <thead>
+                <tr>
+                    <th style="color: red"> صلاحيات الحركات</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                  {% set x=0 %}
+{% for aclAction in form.aclActions %}
+                {% if check_controller_name(form_label(aclAction),'activities')%}
+    {% set x=x+1 %}      </div>
+               <tr style="font-weight: bold">
+                 <td>             
+                     {{get_label_txt(form_label(aclAction))|trans({}, "labels")}}
+               </td>
+               <td>
+                    {{form_widget(aclAction) }}
+                </td>
+                      {% endif%}   
+                    {% endfor %}
+                        </tr>
+                                
+              </tbody>
+            </table>
+                  
+                
+  <!-- End activities -->               
+                
+
+    
+ </div></div></div>
+ <div class="form-actions">
+     
+  
+                
+        </div> 
+              </form> 
+       </div>
+              
+       </div>
+      
+      </div>
+
+<div align="center" style="visibility: hidden">
+     <form id="delete_form" class="print" action="{{ path('User_delete', { 'id': 0 }) }}" method="post">
+            {{ form_widget(delete_form) }}
+</form></div>
+<script type="text/javascript" charset="utf-8">
+    $(".delete_entity").click(function(){
+        var confirmed=confirm('سوف يتم حذف هذا السجل');
+        if(!confirmed){
+            return false;
+            }
+        });
+        
+        
+        $('#acme_demobundle_usertype_roles2_1').change(function(){
+    if(this.checked){
+        $('#acme_demobundle_usertype_roles2_2').attr('checked',false);
+        
+        $('.checkBoxGroup input[type=checkbox]').each(function() {
+            $(this).attr('disabled',true);
+        });
+        }else{
+         $('.checkBoxGroup input[type=checkbox]').each(function() {
+            $(this).removeAttr("disabled");
+        });   
+            }
+        
+});
+
+$('#acme_demobundle_usertype_roles2_2').change(function(){
+    if(this.checked){
+        $('#acme_demobundle_usertype_roles2_1').attr('checked',false);
+        $('.checkBoxGroup input[type=checkbox]').each(function() {
+            $(this).removeAttr("disabled");
+        });
+        }
+});
+
+
+$("#Add").click(function() {
+var isChecked=false;
+$('.checkBoxRols input[type=checkbox]').each(function() {
+            if(this.checked){
+                isChecked=true;
+                }
+        });
+        
+        if(!isChecked){
+            alert('قم باختيار تصنيف المستحدم');
+            return false;
+            }
+});
+    </script>
+{% endblock %}
+

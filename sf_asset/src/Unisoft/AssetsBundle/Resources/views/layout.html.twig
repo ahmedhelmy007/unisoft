@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta charset="utf-8">
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <title>{% block title %}Assets{% endblock %}</title>
+
+        <script src="{{ asset('bundles/template/js/application.js') }}" type="text/javascript"></script>
+{#        
+<script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+#}
+        {% set lang='dir'|trans({}, "messages")%}
+        <link   href="{{ asset('bundles/template/css/application.'~ lang ~'.css') }}" media="screen" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/template/css/prettify.css') }}" media="screen" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/template/css/prettyPhoto.css') }}" media="screen" rel="stylesheet" type="text/css" />
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+     
+       
+ 
+<!--[if lt IE 9]>
+<script src="{{ asset('bundles/template/js/excanvas.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/template/js/excanvas.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/template/js/iefix.js')    }}" type="text/javascript"></script>
+<link  href="{{ asset('bundles/template/js/iefix.css')   }}" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+ 
+
+        <style type="text/css">
+        .box{  
+          behavior: url({{ app.request.getBasePath() }}/bundles/template/PIE/PIE.htc);
+           
+           }
+           .footer{
+             
+           behavior: url({{ app.request.getBasePath() }}/bundles/template/PIE/PIE.htc);
+           }
+       
+        </style>
+      
+        <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+    </head>
+    <body>
+        <div id="modal" class="black-box modal hide fade">
+            <div class="modal-header tab-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <span>Confirm Delete</span>
+            </div>
+            <div class="modal-body separator">
+                <p>are you sure want to delete this item(s)</p>
+            </div>
+            <div class="modal-footer">
+                <div class="inner-well">
+                    <a class="button mini rounded light-gray" data-dismiss="modal">Close</a>
+                    <a class="button mini rounded blue" id="confirm_delete">Delete</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-gallery" class="black-box modal modal-gallery hide fade">
+            <div class="modal-header tab-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <span class="modal-title"></span>
+            </div>
+            <div class="modal-body"><div class="modal-image"></div></div>
+            <div class="modal-footer">
+                <div class="pull-left">
+                    You can also change the images<br/> by scrolling the mouse wheel!
+                </div>
+                <div class="pull-right">
+                    <a class="button blue modal-next">Next <i class="icon-arrow-right icon-white"></i></a>
+                    <a class="button gray modal-prev"><i class="icon-arrow-left icon-white"></i> Previous</a>
+                    <a class="button green modal-play modal-slideshow" data-slideshow="5000"><i class="icon-play icon-white"></i> Slideshow</a>
+                    <a class="button black" target="_blank"><i class="icon-download"></i> Download</a>
+                </div>
+            </div>
+        </div>
+        <nav id="primary" class="main-nav">
+            <ul>
+                
+                 <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                                 <div  >
+                         <img src="{{ asset('bundles/template/images/icon/arrow.png') }}" /></div>{%trans%}More {%endtrans%} <span class="caret"></span></a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ path('Vendors') }}">
+                                    <i class="icon-warning-sign"></i>{%trans%} Vendors{%endtrans%}
+                                </a>
+                            </li>
+
+
+
+                            <li>
+                                <a href="{{ path('Manufacturers') }}">
+                                    <i class="icon-book"></i> {%trans%}Manufacturers{%endtrans%}
+                                </a>
+                            </li>
+
+
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('_user_logout') }}">
+                                    <i class="icon-off"></i>{%trans%} Logout {%endtrans%}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                <li {% if get_controller_name() =='home'%} class="active" {%endif%}>
+                    <a href="{{ path('home') }}">
+                         <div  >
+                         <img src="{{ asset('bundles/template/images/icon/home.png') }}" /></div>{%trans%} Home{%endtrans%}
+                    </a>
+                </li>
+                
+                 <li {% if get_controller_name() =='user'%} class="active" {%endif%}>
+                     <a href="{{ path('User') }}">
+                      <div  >
+                         <img src="{{ asset('bundles/template/images/icon/userss.png') }}" /></div>{%trans%} Users{%endtrans%}
+                    </a>
+                </li>
+
+                <li {% if get_controller_name() =='assets'%} class="active" {%endif%}>
+                        <a href="{{ path('assets') }}">
+                            <div  >
+                         <img src="{{ asset('bundles/template/images/icon/wrench - Copy.png') }}" /></div> {%trans%}Assets{%endtrans%}
+                        </a>
+                 </li>
+
+                    <li {% if get_controller_name() =='categories'%} class="active" {%endif%}>
+                        <a href="{{ path('Categories') }}">
+                           <div  >
+                         <img src="{{ asset('bundles/template/images/icon/cats.png') }}" /></div> {%trans%}Categories{%endtrans%}
+                        </a>
+                    </li>
+
+                    <li {% if get_controller_name() =='Mentainence'%} class="active" {%endif%}>
+                        <a href="#">
+                            <div  >
+                         <img src="{{ asset('bundles/template/images/icon/maintance.png') }}" /></div> {%trans%}Maintenance{%endtrans%}
+                        </a>
+                    </li>
+
+                    <li {% if get_controller_name() =='Depreciations'%} class="active" {%endif%}>
+                        <a href="#">
+                              <div  >
+                         <img src="{{ asset('bundles/template/images/icon/Depreciations.png') }}" /></div>{%trans%} Depreciations{%endtrans%}
+                        </a>
+                    </li>
+
+                   
+
+                    <li>
+                        <a href="{{ path('_user_logout') }}">
+                               <div  >
+                                   <img src="{{ asset('bundles/template/images/icon/logout.png') }}" /></div>{%trans%}Logout{%endtrans%}
+                        </a>
+                    </li>
+
+                </ul>
+            </nav><nav id="secondary" class="main-nav">
+
+                <div class="profile-menu">
+
+                    <div class="pull-left">
+                        <div class="avatar">
+                            <img src="{{ asset('bundles/template/images/icon/user.png') }}" />
+                        </div>
+                    </div>
+
+                    <div class="pull-left">
+                        <div class="title">
+                       {{ app.user.username }}
+                    
+                     
+                            </div>
+                            <div class="btn-group">
+                                <button class="button mini inset black"><i class="icon-search"></i></button>
+                                <button class="button mini inset black"><a href="{{ path('User_edit', { 'id': app.user.id }) }}" style="color:white">{%trans%}Profile{%endtrans%}</a></button>
+                                <button class="button mini inset black dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i></button>
+                                <ul class="dropdown-menu black-box-dropdown">
+                                    <li><a href="{{ path('User_editpass',{ 'id': app.user.id } ) }}">{%trans%}Change Your Password{%endtrans%}</a></li>
+                                    
+                                   
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <div class="pull-right profile-menu-nav-collapse">
+                            <button class="button black"><i class="icon-reorder"></i></button>
+                        </div>
+
+                    </div>
+
+                    <ul class="secondary-nav-menu">
+
+      {% if get_controller_name() =='assets' 
+            or get_controller_name() =='locations'
+            or get_controller_name() =='vendors'
+            or get_controller_name() =='manufacturers'
+            or get_controller_name() =='cost'
+            or get_controller_name() =='employees'
+            or get_controller_name() =='assetactivities'
+            or get_controller_name() =='administrations'
+            or get_controller_name() =='departments'
+            or get_controller_name() =='position'
+
+%}
+                        <li {% if get_controller_name() =='assets'%} class="active" {%endif%}>
+                            <a href="{{ path('assets') }}">
+                                <img src="{{ asset('bundles/template/images/icon/wrench.png') }}" />&nbsp; {%trans%}Assets{%endtrans%}
+                            </a>
+                        </li>
+
+                        <li {% if get_controller_name() =='locations'%} class="active" {%endif%}>
+                            <a href="{{ path('Locations') }}">
+                               <img src="{{ asset('bundles/template/images/icon/gpss.png') }}" />&nbsp;{%trans%} Locations {%endtrans%}
+                            </a>
+                        </li>
+                        
+                        <li {% if get_controller_name() =='vendors'%} class="active" {%endif%}>
+                            <a href="{{ path('Vendors') }}">
+                                <img src="{{ asset('bundles/template/images/icon/vendors.png') }}" />&nbsp;{%trans%} Vendors{%endtrans%}
+                            </a>
+                        </li>
+                        
+                         
+                        <li {% if get_controller_name() =='manufacturers'%} class="active" {%endif%}>
+                            <a href="{{ path('Manufacturers') }}">
+                                 <img src="{{ asset('bundles/template/images/icon/hands.png') }}" />&nbsp;{%trans%} Manufacturers{%endtrans%}
+                            </a>
+                        </li>
+                         <li {% if get_controller_name() =='cost'%} class="active" {%endif%}>
+                            <a href="{{ path('Cost') }}">
+                                 <img src="{{ asset('bundles/template/images/icon/cost.png') }}" />&nbsp; {%trans%}Cost Center{%endtrans%}
+                            </a>
+                        </li>
+
+                        <li {% if get_controller_name() =='employees'%} class="active" {%endif%}>
+                            <a href="{{ path('Employees') }}">
+                                <img src="{{ asset('bundles/template/images/icon/empl.png') }}" />&nbsp; {%trans%}Employees{%endtrans%}
+                            </a>
+                        </li>
+                        
+                         <li {% if get_controller_name() =='administrations'%} class="active" {%endif%}>
+                            <a href="{{ path('administrations') }}">
+                               <img src="{{ asset('bundles/template/images/icon/admins.png') }}" />&nbsp;{%trans%} Administrations{%endtrans%}
+                            </a>
+                        </li>
+                        
+                        <li {% if get_controller_name() =='departments'%} class="active" {%endif%}>
+                            <a href="{{ path('departments') }}">
+                                <i class="icon-cogs"></i> {%trans%}Departments{%endtrans%}
+                            </a>
+                        </li>
+                        
+                        <li {% if get_controller_name() =='position'%} class="active" {%endif%}>
+                            <a href="{{ path('position') }}">
+                                <img src="{{ asset('bundles/template/images/icon/job.png') }}" />&nbsp; {%trans%}Jobs{%endtrans%}
+                            </a>
+                        </li>
+
+                        <li {% if get_controller_name() =='assetactivities'%} class="active" {%endif%}>
+                            <a href="{{ path('activities') }}">
+                                <i class=" icon-magic"></i>{%trans%} Activities{%endtrans%}
+                            </a>
+                        </li>
+
+                        <li>
+
+                            <a href="{{ path('assets_section', { 'slug': 'Value Modification' }) }}">
+                                <i class=" icon-random"></i> {%trans%}Value Modification{%endtrans%}
+                            </a>
+                        </li>
+{%endif%}
+
+           
+                    </ul>
+
+                </nav>
+
+
+
+                <section id="main">
+                    <div class="top-nav">
+                        <div class="container-fluid">
+                            <div class="row-fluid search-button-bar-container">
+                                <div class="span12">
+                                    {{ wo_render_breadcrumbs() }}
+                                     <a class="search-button-trigger" href="#"><i class="icon-search"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="row-fluid search-bar-nav">
+                                <div class="span12">
+                                    <form>
+                                        <input type="text" class="search" placeholder="Search...">
+                                    </form>
+                                </div>
+                            </div>
+  
+                        </div>
+                            
+                    </div>
+                               
+
+                    <div class="container-fluid">
+                      
+<span class="lang">                          
+<a  title="{%trans%}English{%endtrans%}" href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}"><img src="{{ asset('bundles/template/images/icon/en.png') }}" /></a>
+<a  title="{%trans%}Arabic{%endtrans%}"  href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ar'})) }}"><img src="{{ asset('bundles/template/images/icon/ar.png') }}" /></a>
+</span>
+  {% block content %}{% endblock %}
+
+                        </div>
+
+
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="footer">
+                                    <div>{%trans%}Project Assets{%endtrans%}</div>
+                                    <div>{%trans%}Carefully crafted by{%endtrans%} <a href="#">{%trans%}Unisoft company{%endtrans%} </a></div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    
+                </section>
+    {% raw %}
+                <script type="text/html" id="template-notification">
+                    <div class="notification animated fadeInLeftMiddle fast{{ item.itemClass }}">
+                        <div class="left">
+                            <div style="background-image: url({{ item.imagePath }})" class="{{ item.imageClass }}"></div>
+                        </div>
+                        <div class="right">
+                            <div class="inner">{{ item.text }}</div>
+                            <div class="time">{{ item.time }}</div>
+                        </div>
+
+                        <i class="icon-remove-sign hide"></i>
+                    </div>
+                </script>
+                <script type="text/html" id="template-notifications">
+                    <div class="container">
+                        <div class="row" id="notifications-wrapper">
+                            <div id="notifications" class="{{ bootstrapPositionClass }} notifications animated">
+                                <div id="dismiss-all" class="dismiss-all button blue">Dismiss all</div>
+                                <div id="content">
+                                    <div id="notes"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+{% endraw %}
+<!-- Delete confirm and submit the form -->
+        <a href="#" id="modal-link"></a>
+        <script type="text/javascript">
+            $("#delete_row").click(function() {
+                var deleteform=$(this).attr("name");
+                if("#"+deleteform)
+                {
+                            $("#modal-link").click();
+                            $("#confirm_delete").click(function(){
+                                $(".close").click();
+                                $("#"+deleteform).submit();
+                            });
+                }
+        });
+            </script>
+                 <!-- lightbox script -->
+   <script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+                            
+                            $(".assets_search").click(function(){
+                                var $this=$(this);
+                                var $val=$("#"+$(this).attr("sourceId")).val();
+                                //if($val==""){$val="all";}
+                                $val="all";
+                                var $fieldName=$(this).attr("fieldName");
+                                var value = $this.attr("href"); // value = 9.61 use $("#text").text() if you are not on select box...
+                                var array = value.split('/');
+                                var $len=array.length;
+                                array[$len-3]=$val;
+                                array[$len-2]=$fieldName;
+                                var naction=array.join("/");
+
+                                $this.attr("href",naction);
+
+                            });
+                            
+				$("area[rel^='prettyPhoto']").prettyPhoto();
+				
+				$(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'light_square', social_tools: false,slideshow:3000, autoplay_slideshow: false});
+				$(".gallery:gt(0) a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'fast', social_tools: false,slideshow:10000, hideflash: true});
+		
+				$("#custom_content a[rel^='prettyPhoto']:first").prettyPhoto({
+					custom_markup: '<div id="map_canvas" style="width:260px; height:265px"></div>',
+					changepicturecallback: function(){ initialize(); }
+				});
+
+				$("#custom_content a[rel^='prettyPhoto']:last").prettyPhoto({
+					custom_markup: '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div><div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
+					changepicturecallback: function(){ _bsap.exec(); }
+				});
+			});
+			</script>   
+{% block javascripts %}
+
+                <script src="{{ asset('bundles/template/js/jquery.tmpl.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('bundles/template/js/docs.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('bundles/template/js/docs_charts.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('bundles/template/js/documentation.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('bundles/template/js/prettify.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('bundles/template/js/jquery.cookie.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('bundles/template/js/jquery.treeview.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('bundles/template/js/jquery.form.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('bundles/template/js/jquery.prettyPhoto.js') }}" type="text/javascript"></script>
+             
+
+{% endblock %}
+
+                <script type="text/javascript">
+                    prettyPrint();
+                    </script>
+                </body>
+            </html>

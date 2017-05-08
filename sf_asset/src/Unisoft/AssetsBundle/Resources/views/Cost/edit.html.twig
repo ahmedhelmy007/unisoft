@@ -1,0 +1,98 @@
+{% extends "UnisoftAssetsBundle::layout.html.twig" %}
+{% block title %}{%trans%}Edit Cost Center{%endtrans%}{% endblock %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('notice2') %}
+          <div  class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button> 
+  <ul>
+                    <li>{{ flashMessage|nl2br }}</li>
+ </ul>
+          </div>
+{% endfor %} 
+      
+{% for flashMessage in app.session.flashbag.get('notice1') %}
+            <div  class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ flashMessage }}
+	   </div>
+        
+{% endfor %} 
+<div class="row-fluid">
+  <div class="span12">
+    <div class="box">
+      <div class="tab-header">{%trans%}Edit Cost Center{%endtrans%}<span class="pull-right"></span>
+      </div>
+      <form  class="fill-up"  action="{{ path('Cost_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} novalidate >
+        {{ form_widget(edit_form._token) }}
+              
+          <div class="row-fluid">
+          <div class="span6">
+            <div class="padded">
+             
+             <div class="input">
+             {{form_widget(edit_form.costCenterNo) }}
+             <span class="input-error" data-title="{%trans%}Can\'t write a Cost Cente Number{%endtrans%}" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>  
+            </div>             
+            <div class="input">   
+            {{form_widget(edit_form.arName) }}
+            <span class="input-error" data-title="{% trans %}please write a Arabic Name{%endtrans%}" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>       
+            </div>
+            <div class="input">
+             {{form_widget(edit_form.enName) }}
+            <span class="input-error" data-title="{% trans %}please write a English Name{%endtrans%}" data-original-title="">
+            <i class="icon-info-sign"></i>
+            </span>
+            </div>
+          </div></div>
+
+          <div class="span6">
+            <div class="padded" style="padding-bottom: 0">       
+    <br>
+  
+    
+
+</div></div>
+              
+              </div>
+         {% include "UnisoftAssetsBundle:Elements:pagingWidget.html.twig" with {'pagingWidget': pagingWidget,'redirect_url':'Cost_edit'} %}
+         {% include "UnisoftAssetsBundle:Elements:actions.html.twig" with {'entity_name':'Cost','entity': entity,'controller_route':'Cost'} %}  
+        </div>
+      </div>
+        
+        
+        
+    </div>
+<script>
+    var arabic_changed=0; 
+    var english_changed=0;
+    
+    $("#form_arName").keyup(function () {
+       arabic_changed=1;
+   //    alert('arabic_changed:' +arabic_changed + ' and english_changed:' + english_changed);
+       if(english_changed == 0){
+           var value = $(this).val();
+          document.getElementById("form_enName").value =(value );
+       }
+    });
+
+  $("#form_enName").keyup(function () {
+    english_changed=1;
+       if(arabic_changed == 0){
+    var value = $(this).val();
+         document.getElementById("form_arName").value =(value );
+  }
+    });
+    
+    
+    
+    
+</script>
+        {% endblock %}
+
+
